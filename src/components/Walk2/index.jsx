@@ -51,4 +51,3 @@ export default function Walk2() {
     </div>
   )
 }
-

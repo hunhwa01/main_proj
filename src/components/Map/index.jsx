@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 
-const Map = ({ address }) => {
+const Map = ({ latitude, longitude }) => {
   const [map, setMap] = useState(null);
-  const [marker, setMarker] = useState(null); // 마커 객체
+  const [marker, setMarker] = useState(null);
 
   useEffect(() => {
     const script = document.createElement("script");
     script.src =
-      "//dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_KAKAO_MAP_API_KEY&autoload=false";
+      "//dapi.kakao.com/v2/maps/sdk.js?appkey=1a4c825ee54297f08eea51788c4ac917&autoload=false";
     script.async = true;
 
     script.onload = () => {
       window.kakao.maps.load(() => {
         const container = document.getElementById("map");
         const options = {
-          center: new window.kakao.maps.LatLng(37.5665, 126.9780), // 초기 서울 좌표
+          center: new window.kakao.maps.LatLng(37.5665, 126.9780), // 초기 좌표: 서울
           level: 3,
         };
         const createdMap = new window.kakao.maps.Map(container, options);
@@ -26,20 +26,8 @@ const Map = ({ address }) => {
   }, []);
 
   useEffect(() => {
-    if (address && map) {
-      fetchCoordinates(address);
-    }
-  }, [address, map]);
-
-  const fetchCoordinates = async (inputAddress) => {
-    try {
-      const response = await fetch(`http://127.0.0.1:8000/convert-address?address=${encodeURIComponent(inputAddress)}`);
-      if (!response.ok) {
-        throw new Error("좌표 변환 실패");
-      }
-
-      const data = await response.json();
-      const coords = new window.kakao.maps.LatLng(data.latitude, data.longitude);
+    if (latitude && longitude && map) {
+      const coords = new window.kakao.maps.LatLng(latitude, longitude);
 
       // 지도 중심 이동
       map.setCenter(coords);
@@ -53,10 +41,8 @@ const Map = ({ address }) => {
         position: coords,
       });
       setMarker(newMarker);
-    } catch (error) {
-      console.error("주소 변환 오류:", error);
     }
-  };
+  }, [latitude, longitude, map]);
 
   return (
     <div
