@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
-class AddressResponse(BaseModel):
-    latitude: str
-    longitude: str
+class AddressCreate(BaseModel):
+    address: str
+    latitude: float
+    longitude: float

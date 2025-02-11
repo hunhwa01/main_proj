@@ -1,52 +1,44 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const Map = ({ latitude, longitude }) => {
-  const [map, setMap] = useState(null);
-  const [marker, setMarker] = useState(null);
+  const mapRef = useRef(null);
+  const [mapLoaded, setMapLoaded] = useState(false);
 
   useEffect(() => {
+    if (window.google && window.google.maps) {
+      setMapLoaded(true);
+      return;
+    }
+
     const script = document.createElement("script");
-    script.src =
-      "//dapi.kakao.com/v2/maps/sdk.js?appkey=1a4c825ee54297f08eea51788c4ac917&autoload=false";
+    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDibCdcK4JBV60aFaIFohHe3PXEeuDIBww`;
     script.async = true;
+    script.defer = true;
 
     script.onload = () => {
-      window.kakao.maps.load(() => {
-        const container = document.getElementById("map");
-        const options = {
-          center: new window.kakao.maps.LatLng(37.5665, 126.9780), // 초기 좌표: 서울
-          level: 3,
-        };
-        const createdMap = new window.kakao.maps.Map(container, options);
-        setMap(createdMap);
-      });
-    };
+      setMapLoaded(true);
+      };
 
     document.head.appendChild(script);
-  }, []);
+    }, []);
 
-  useEffect(() => {
-    if (latitude && longitude && map) {
-      const coords = new window.kakao.maps.LatLng(latitude, longitude);
-
-      // 지도 중심 이동
-      map.setCenter(coords);
-
-      // 기존 마커 제거
-      if (marker) marker.setMap(null);
-
-      // 새로운 마커 추가
-      const newMarker = new window.kakao.maps.Marker({
-        map: map,
-        position: coords,
-      });
-      setMarker(newMarker);
-    }
-  }, [latitude, longitude, map]);
+    useEffect(() => {
+      if (mapLoaded && latitude && longitude) {
+        const map = new window.google.maps.Map(mapRef.current, {
+          center: { lat: latitude, lng: longitude },
+          zoom: 14,
+        });
+  
+        new window.google.maps.Marker({
+          position: { lat: latitude, lng: longitude },
+          map: map,
+        });
+      }
+    }, [mapLoaded, latitude, longitude]);
 
   return (
     <div
-      id="map"
+      ref={mapRef}
       style={{
         width: "100%",
         height: "450px",
