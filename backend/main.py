@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.routers.address import router as address_router
 from backend.routers.google_places import router as google_places_router  # Google Places 라우터 임포트
-from backend.database import init_db, test_db_connection
 
 app = FastAPI()
 
@@ -18,10 +17,6 @@ app.add_middleware(
 @app.get("/")
 async def read_root():
     return {"message": "FastAPI server is running!"}
-
-@app.on_event("startup")
-def on_startup():
-    test_db_connection()  # DB 연결 테스트
 
 # 라우터 등록
 app.include_router(address_router, prefix="/api/address", tags=["Address"])

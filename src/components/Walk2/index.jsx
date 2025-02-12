@@ -24,10 +24,13 @@ export default function Walk2() {
 
     try {
       // 선택된 주소에서 place_id 가져오기
-      const placeId = address.value.place_id;
+      const placeId = selectedPlace?.value?.place_id;
+      if (!placeId) throw new Error("유효한 주소를 선택해주세요!");
       
-      // place_id를 이용해 주소 -> 좌표 변환
       const geoData = await geocodeByPlaceId(placeId);
+      if (!geoData || geoData.length === 0) {
+          throw new Error("좌표 데이터를 찾을 수 없습니다.");
+      }
       const location = geoData[0].geometry.location;
 
       const requestData = {
@@ -73,7 +76,7 @@ export default function Walk2() {
           <GooglePlacesAutocomplete
             apiKey={process.env.REACT_APP_GOOGLE_API_KEY}
             selectProps={{
-              value: selectedPlace,
+              value: selectedPlace || null,
               onChange: (place) => {
                 setSelectedPlace(place); // 전체 객체 저장 (주소 변환용)
                 setAddress(place.label); // 문자열만 저장 (입력 필드 표시용)

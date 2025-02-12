@@ -1,7 +1,7 @@
-import httpx
 from sqlalchemy.ext.asyncio import AsyncSession
-from backend.models import Address
-from backend.schemas.address import AddressCreate, AddressResponse
+from backend.models.address import Address
+from sqlalchemy.future import select
+import httpx
 import os
 
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
@@ -28,7 +28,9 @@ async def get_coordinates_from_google(address: str):
 
 async def save_address_to_db(address: str, db: AsyncSession):
     """
-    주소를 좌표로 변환한 후 DB에 저장합니다.
+    1. 입력된 주소를 Google API로 변환
+    2. 변환된 위도/경도를 DB에 저장
+    3. 저장된 데이터를 반환
     """
     coordinates = await get_coordinates_from_google(address)
 
@@ -37,8 +39,15 @@ async def save_address_to_db(address: str, db: AsyncSession):
         latitude=coordinates["latitude"],
         longitude=coordinates["longitude"]
     )
+
     db.add(new_address)
     await db.commit()
     await db.refresh(new_address)
 
     return {"id": new_address.id, "latitude": new_address.latitude, "longitude": new_address.longitude}
+
+async def get_all_addresses(db: AsyncSession):
+    """저장된 모든 주소 데이터를 반환"""
+    result = await db.execute(select(Address))
+    addresses = result.scalars().all()
+    return addresses
