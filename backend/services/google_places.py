@@ -16,10 +16,14 @@ async def fetch_place_autocomplete(input_text: str) -> list:
         "key": GOOGLE_API_KEY,
         "types": "geocode",  # 주소 유형 필터
         "language": "ko",    # 한국어 설정
+        "components": "country:KR"
     }
 
     async with httpx.AsyncClient() as client:
         response = await client.get(url, params=params)
+
+    print(f"📩 입력된 `input_text`: {input_text}")
+    print(f"🔎 API 응답 데이터: {response.json()}")  # 응답을 출력해서 확인
 
     if response.status_code != 200:
         raise Exception(f"Google Places API 요청 실패: {response.status_code}")

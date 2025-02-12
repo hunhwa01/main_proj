@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import "./Walk2.css"
+import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+import { geocodeByPlaceId } from "react-google-places-autocomplete";
+import "./Walk2.css";
 
 export default function Walk2() {
   const [address, setAddress] = useState("");
+  const [selectedPlace, setSelectedPlace] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -20,18 +23,17 @@ export default function Walk2() {
     setError(null);
 
     try {
-      // 주소 → 좌표 변환 API 호출
-      const geoResponse = await fetch(
-        `http://127.0.0.1:8000/api/convert-address?address=${address}`
-      );
-      if (!geoResponse.ok) throw new Error("주소 변환 실패");
-      const geoData = await geoResponse.json();
+      // 선택된 주소에서 place_id 가져오기
+      const placeId = address.value.place_id;
+      
+      // place_id를 이용해 주소 -> 좌표 변환
+      const geoData = await geocodeByPlaceId(placeId);
+      const location = geoData[0].geometry.location;
 
-      // DB에 저장할 데이터 준비
       const requestData = {
-        address,
-        latitude: geoData.latitude,
-        longitude: geoData.longitude,
+        address: selectedPlace.label,
+        latitude: location.lat(),
+        longitude: location.lng(),
       };
 
       // 주소 저장 API 호출
@@ -66,6 +68,20 @@ export default function Walk2() {
           <label htmlFor="address" className="input-label">
             주소
           </label>
+
+          {/* Google Places Autocomplete 입력 필드 */}
+          <GooglePlacesAutocomplete
+            apiKey={process.env.REACT_APP_GOOGLE_API_KEY}
+            selectProps={{
+              value: selectedPlace,
+              onChange: (place) => {
+                setSelectedPlace(place); // 전체 객체 저장 (주소 변환용)
+                setAddress(place.label); // 문자열만 저장 (입력 필드 표시용)
+              },
+              placeholder: "주소를 입력하세요",
+            }}
+          />
+
           <input type="text" id="address" className="input-field" placeholder="주소를 입력해주세요"
             value={address}
             onChange={handleInputChange}

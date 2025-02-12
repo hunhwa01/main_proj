@@ -23,7 +23,6 @@ async def read_root():
 def on_startup():
     test_db_connection()  # DB 연결 테스트
 
-
 # 라우터 등록
 app.include_router(address_router, prefix="/api/address", tags=["Address"])
 app.include_router(google_places_router, prefix="/api/places", tags=["Google Places"])
