@@ -1,6 +1,6 @@
 .login-container {
     min-height: 100vh;
-    background-color: #f5f5f5;
+    background-color: #e5e5e5;
     padding: 20px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
       "Helvetica Neue", sans-serif;
@@ -13,18 +13,31 @@
   }
   
   .login-back-button {
+    position: absolute;
+    left: 20px;
+    top: 20px;
     background: none;
     border: none;
-    padding: 8px;
     cursor: pointer;
-    color: #333;
+    padding: 0;
+  }
+  
+  .login-header h1 {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100px; /* 헤더의 높이를 유지 */
   }
   
   .login-logo {
-    margin-left: 16px;
-    font-size: 24px;
-    font-weight: bold;
-    color: #0c8e36;
+    max-height: 80%; /* 로고의 최대 높이를 헤더 높이의 80%로 제한 */
+    width: auto;
+    object-fit: contain;
+    margin-top: auto; /* 로고를 아래쪽으로 정렬 */
+    margin-bottom: 10px; /* 하단에 약간의 여백 추가 */
+    position: relative; /* 위치 조정을 위해 position 속성 추가 */
   }
   
   .login-content {
@@ -54,7 +67,7 @@
     width: 100%;
     padding: 12px 0;
     border: none;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 2px solid #075915;
     background: transparent;
     font-size: 16px;
     outline: none;
@@ -65,20 +78,48 @@
   }
   
   .login-login-button {
-    margin-top: 20px;
+    display: block;
+    margin: 20px auto 0;
     padding: 15px;
-    border: none;
-    border-radius: 8px;
-    background-color: #0c8e36;
-    color: white;
-    font-size: 16px;
-    font-weight: 500;
+    border: 2px solid #075915; /* 테두리 색상 추가 */
+    border-radius: 30px;
+    background-color: white; /* 배경색 흰색 */
+    color: #075915; /* 글자 색상 변경 */
+    font-weight: bold; /* 글자 굵게 */
+    font-size: 20px;
     cursor: pointer;
-    width: 100%;
+    width: 60%;
+    text-align: center;
+}
+  
+  .login-signup-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
   }
   
-  .login-button:hover {
-    background-color: #0a7a2f;
+  .login-signup-link {
+    color: #075915;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;
+  }
+  
+  .login-signup-link::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: #075915;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+  
+  .login-signup-link:hover::after {
+    transform: scaleX(1);
   }
   
   

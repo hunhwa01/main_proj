@@ -1,20 +1,24 @@
 /* 전체 컨테이너 스타일 */
-.temporary-care {
+.TemporaryCare_Re-temporary-care {
   background-color: #e8eae8;
-  min-height: 100vh;
-  box-sizing: border-box;
-  overflow-x: hidden; /* 좌우 스크롤 방지 */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 /* 헤더 스타일 */
-.header {
+.TemporaryCare_Re-header {
   background-color: #ffffff;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 /* 헤더 내용 스타일 */
-.header-content {
+.TemporaryCare_Re-header-content {
   display: flex;
   flex-direction: column;
   max-width: 1200px;
@@ -22,7 +26,7 @@
 }
 
 /* 뒤로 가기 버튼 스타일 */
-.back-button {
+.TemporaryCare_Re-back-button {
   background: none;
   border: none;
   font-size: 24px;
@@ -32,32 +36,50 @@
 }
 
 /* 제목과 설명 컨테이너 스타일 */
-.title-description {
+.TemporaryCare_Re-title-description {
   margin-top: 16px;
 }
 
 /* 제목 스타일 */
-.title-description h1 {
+.TemporaryCare_Re-title-description h1 {
   margin: 0 0 16px 0;
   font-size: 24px;
 }
 
 /* 설명 텍스트 스타일 */
-.description {
+.TemporaryCare_Re-description {
   margin: 0;
   color: #666;
   line-height: 1.5;
 }
 
 /* 메인 컨텐츠 영역 스타일 */
-.main-content {
+.TemporaryCare_Re-main-content {
+  flex: 1;
+  overflow-y: auto;
   padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
+}
+
+/* 스크롤바 스타일링 */
+.TemporaryCare_Re-main-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.TemporaryCare_Re-main-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.TemporaryCare_Re-main-content::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.TemporaryCare_Re-main-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 /* 강아지 카드 그리드 스타일 */
-.dogs-grid {
+.TemporaryCare_Re-dogs-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2x2 그리드 */
   gap: 16px;
@@ -66,7 +88,7 @@
 
 /* 반응형 디자인을 위한 미디어 쿼리 */
 @media (max-width: 768px) {
-  .dogs-grid {
+  .TemporaryCare_Re-dogs-grid {
     grid-template-columns: 1fr; /* 작은 화면에서는 한 열로 표시 */
   }
 }

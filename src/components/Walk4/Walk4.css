@@ -1,0 +1,98 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.Walk4-container {
+  height: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background-color: #e8eae8;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* 스크롤바 스타일링 */
+.Walk4-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.Walk4-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.Walk4-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.Walk4-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Header Section */
+.Walk4-header {
+  padding: 20px;
+  background-color: white;
+}
+
+/* 뒤로가기 버튼 */
+.Walk4-back-button {
+  padding: 8px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* 제목 */
+.Walk4-title {
+  font-size: 24px;
+  font-weight: 500;
+  margin-top: 24px;
+  line-height: 1.4;
+}
+
+/* Bottom Section (높이 살짝 줄임) */
+.Walk4-bottom-section {
+  margin-top: auto;
+  padding: 16px; /* 기존 padding 유지 */
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* 버튼과 텍스트 사이 간격 조정 */
+  background-color: white;
+}
+
+/* 다음으로 버튼 */
+.Walk4-next-button {
+  background-color: #006400;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin: 10px 0; /* 🔹 버튼 위아래 여백 살짝 줄임 */
+}
+
+.Walk4-next-button:hover {
+  background-color: #005300;
+}
+
+@media (max-width: 500px) {
+  .Walk4-container {
+    width: 100%;
+  }
+}
+

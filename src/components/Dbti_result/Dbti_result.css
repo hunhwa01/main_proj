@@ -1,0 +1,98 @@
+/* ✅ 전체 컨테이너 */
+.DbtiResult-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-color: #e8eae8;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* ✅ 헤더 */
+.DbtiResult-header {
+  width: 100%;
+  background-color: #ffffff;
+  height: auto;
+  min-height: 120px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* ✅ 헤더 내부 콘텐츠 */
+.DbtiResult-header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+/* ✅ 뒤로가기 아이콘 */
+.DbtiResult-back-icon {
+  width: 24px;
+  height: auto;
+  cursor: pointer;
+  margin: 8px 0 0 28px;
+}
+
+/* ✅ 제목 */
+.DbtiResult-header-content h1 {
+  font-size: 33px;
+  font-weight: bold;
+  color: #075915;
+  margin: 25px 0 0 28px;
+}
+
+/* ✅ 설명 문구 */
+.DbtiResult-description {
+  margin: 0 0 0 28px;
+  font-size: 18px;
+  color: #565656;
+  margin-top: 8px;
+}
+
+/* ✅ 결과 박스 */
+.DbtiResult-box {
+  width: 320px;
+  height: 150px;
+  background-color: white;
+  border: 2px solid #075915;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+/* ✅ 결과 텍스트 */
+.DbtiResult-text {
+  font-size: 18px;
+  color: #075915;
+}
+
+/* ✅ 등록하기 버튼 */
+.DbtiResult-button {
+  margin-top: 20px;
+  background-color: #075915;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.DbtiResult-button:hover {
+  background-color: #064d10;
+}
+

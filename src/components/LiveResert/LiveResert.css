@@ -109,19 +109,22 @@
     margin-bottom: 32px;
   }
   
-  .liveresert-profile-circle {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+  .liveresert-dog-photo,
+  .liveresert-user-photo {
+    width: 100px;  /* 원하는 크기로 조정 */
+    height: 100px;
+    border-radius: 50%; /* 원형 모양 */
+    overflow: hidden; /* 이미지가 원형 영역을 벗어나지 않도록 */
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
   }
   
   .liveresert-dog-photo img,
   .liveresert-user-photo img {
-    width: 120%;
-    height: 120%;
+    width: 100%;  /* 부모 크기에 맞게 조정 */
+    height: 100%;
+    object-fit: cover; /* 이미지를 원형에 꽉 채우기 */
   }
   
   /* 발자국 아이콘 */

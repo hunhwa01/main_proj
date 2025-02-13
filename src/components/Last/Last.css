@@ -1,0 +1,234 @@
+.last-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 100px);
+  padding-bottom: 100px;
+  background-color: #e5e5e5;
+  box-sizing: border-box;
+  padding: 0 0 20px 0;
+  margin: 0;
+}
+
+.last-header {
+  background-color: #fff;
+  height: auto;
+  min-height: 140px;
+  padding: 20px 20px 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+.last-header-content {
+  width: 100%;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.last-header-content h1 {
+  font-size: 33px;
+  font-weight: bold;
+  color: #000000;
+  margin: 0 0 auto 0;
+}
+
+.last-header-buttons {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 130px;
+}
+
+.last-header-button {
+  background: none;
+  border: none;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #565656;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: -1px;
+}
+
+.last-header-button.active {
+  color: #000;
+  font-weight: 500;
+}
+
+.last-header-button.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #075915;
+}
+
+.last-header-button:hover {
+  color: #000;
+}
+
+.last-year-button {
+  background-color: #fff;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #565656;
+  cursor: pointer;
+  width: auto;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.last-year-button:hover {
+  background-color: #f5f5f5;
+}
+
+.last-year-button-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.last-chat-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 20vh - 30px);
+  font-size: 18px;
+  color: #666;
+  margin-top: 20px;
+}
+
+.last-match-button {
+  margin-top: 20px;
+  padding: 10px 30px;
+  background-color: white;
+  color: #075915;
+  border: 2px solid #075915;
+  border-radius: 25px;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.last-match-button:hover {
+  background-color: #075915;
+  color: white;
+}
+
+.year-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.year-option {
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.year-option:hover {
+  background-color: #f5f5f5;
+}
+
+.reservation-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.reservation-time {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.trainer-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.trainer-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.trainer-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #e5e5e5;
+  overflow: hidden;
+}
+
+.trainer-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.trainer-name {
+  font-size: 16px;
+  color: #333;
+}
+
+.action-button {
+  padding: 8px 20px;
+  border: 1px solid #075915;
+  border-radius: 20px;
+  color: #075915;
+  background: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 120px; /* 고정 너비 설정 */
+  text-align: center;
+  display: inline-block; /* inline-block으로 변경 */
+}
+
+.action-button:hover {
+  background: #075915;
+  color: white;
+}
+
+.review-button {
+  composes: action-button;
+}
+
+.meet-again-button {
+  composes: action-button;
+}
+
+.reservation-list {
+  padding: 20px 0;
+}
+

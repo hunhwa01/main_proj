@@ -1,102 +1,143 @@
-.walk2-container {
-    min-height: 100vh;
-    max-width: 500px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    background-color: #e8eae8;
-  }
-  
-  .white-section {
-    background-color: white;
-    margin-bottom: 20px;
-  }
-  
-  .header {
-    padding: 20px 20px 0;
-  }
-  
-  .back-button {
-    padding: 8px;
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-  }
-  
-  .title {
-    font-size: 24px;
-    font-weight: 500;
-    margin-top: 24px;
-    margin-bottom: 32px;
-  }
-  
-  .input-group {
-    padding: 20px;
-  }
-  
-  .input-label {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 8px;
-    display: block;
-  }
-  
-  .input-field {
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.Walk2-container {
+  height: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background-color: #e8eae8;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* 스크롤바 스타일링 */
+.Walk2-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.Walk2-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.Walk2-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.Walk2-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.Walk2-white-section {
+  background-color: white;
+  margin-bottom: 20px;
+}
+
+.Walk2-header {
+  padding: 20px 20px 0;
+  background-color: white;
+}
+
+.Walk2-back-button {
+  padding: 8px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.Walk2-title {
+  font-size: 24px;
+  font-weight: 500;
+  margin-top: 24px;
+  margin-bottom: 32px;
+}
+
+.Walk2-input-group {
+  padding: 20px;
+  background-color: white;
+}
+
+.Walk2-input-label {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.Walk2-input-field {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  border-bottom: 1px solid #e5e5e5;
+  font-size: 16px;
+  outline: none;
+  margin-bottom: 20px;
+}
+
+.Walk2-input-field:last-child {
+  margin-bottom: 0;
+}
+
+.Walk2-qa-section {
+  margin-top: 12px;
+  padding: 20px;
+  background-color: #e8eae8;
+}
+
+.Walk2-qa-title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.Walk2-qa-content {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.Walk2-bottom-section {
+  margin-top: auto;
+  background-color: white;
+}
+
+.Walk2-bottom-content {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Walk2-confirm-text {
+  font-size: 14px;
+  color: #666;
+}
+
+.Walk2-next-button {
+  background-color: #006400;
+  color: white;
+  padding: 16px 32px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 500px) {
+  .Walk2-container {
     width: 100%;
-    padding: 12px 0;
-    border: none;
-    border-bottom: 1px solid #e5e5e5;
-    font-size: 16px;
-    outline: none;
-    margin-bottom: 20px;
   }
-  
-  .input-field:last-child {
-    margin-bottom: 0;
-  }
-  
-  .qa-section {
-    margin-top: 12px;
-    padding: 20px;
-  }
-  
-  .qa-title {
-    font-size: 20px;
-    font-weight: 500;
-    margin-bottom: 12px;
-  }
-  
-  .qa-content {
-    font-size: 14px;
-    color: #666;
-    line-height: 1.5;
-  }
-  
-  .bottom-section {
-    margin-top: auto;
-    background-color: white;
-  }
-  
-  .bottom-content {
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .confirm-text {
-    font-size: 14px;
-    color: #666;
-  }
-  
-  .next-button {
-    background-color: #006400;
-    color: white;
-    padding: 16px 32px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  
+}
+

@@ -3,7 +3,7 @@ import TemporaryCare from '../components/TemporaryCare'
 
 function TemporaryCarePage() {
   return (
-    <div>
+    <div className="page-wrapper">
       <TemporaryCare/>
     </div>
   )

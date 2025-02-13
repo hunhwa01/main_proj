@@ -8,12 +8,12 @@ function Profile() {
       <header className="profile-header">
         <div className="profile-header-top">
           <h1>더보기</h1>
-          <a href="/my-profile" className="profile-link">내 프로필</a>
+          <a href="/MyProfilePage" className="profile-link">내 프로필</a>
         </div>
         <div className="profile-header-bottom">
           <a href="/DogInformationPage" className="profile-link-container">
             <div className="profile-avatar">
-              <img src="/profileicons/avatar.png" alt="프로필 이미지" />
+              <img src="/dogprofile/dog.jpg" alt="프로필 이미지" />
             </div>
             <div className="profile-details">
               <span>반려동물 프로필</span>

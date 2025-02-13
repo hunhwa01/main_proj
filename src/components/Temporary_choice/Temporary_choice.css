@@ -1,135 +1,133 @@
 .temporary-choice {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background-color: #ffffff;
-  }
-  
-  .choice-header {
-    padding: 20px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    background-color: transparent;
-  }
-  
-  .back-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    margin: -8px;
-    border-radius: 50%;
-  }
-  
-  .choice-content {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-  }
-  
-  .image-container {
-    position: relative;
-    width: 100%;
-    padding-top: 100%;
-    background-color: #f5f5f5;
-  }
-  
-  .main-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .image-dots {
-    position: absolute;
-    bottom: 16px;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-  }
-  
-  .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.5);
-    border: none;
-    padding: 0;
-    cursor: pointer;
-  }
-  
-  .dot.active {
-    background-color: #ffffff;
-  }
-  
-  .dog-details {
-    padding: 24px;
-    flex: 1;
-  }
-  
-  .details-content {
-    background-color: #ffffff;
-    border-radius: 20px;
-    padding: 20px;
-  }
-  
-  .dog-name {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0 0 8px 0;
-  }
-  
-  .basic-info,
-  .status-info,
-  .location-info {
-    margin: 0 0 4px 0;
-    font-size: 15px;
-    color: #666;
-  }
-  
-  .status-info {
-    color: #4a90e2;
-  }
-  
-  .details-section {
-    margin-top: 24px;
-  }
-  
-  .details-section h2 {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0 0 12px 0;
-  }
-  
-  .details-section p {
-    font-size: 15px;
-    line-height: 1.6;
-    color: #333;
-    white-space: pre-line;
-  }
-  
-  .inquiry-button {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 18px;
-    background-color: #075915;
-    color: white;
-    border: none;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    margin: 16px;
-    border-radius: 12px;
-  }
-  
-  
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+.temporary-choice-header {
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background-color: transparent;
+}
+
+.temporary-choice-back-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  margin: -8px;
+  border-radius: 50%;
+}
+
+.temporary-choice-choice-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.temporary-choice-image-container {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  background-color: #f5f5f5;
+}
+
+.temporary-choice-main-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.temporary-choice-image-dots {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.temporary-choice-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.temporary-choice-dot.temporary-choice-active {
+  background-color: #ffffff;
+}
+
+.temporary-choice-dog-details {
+  padding: 24px;
+  flex: 1;
+}
+
+.temporary-choice-details-content {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.temporary-choice-dog-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+}
+
+.temporary-choice-basic-info,
+.temporary-choice-status-info,
+.temporary-choice-location-info {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  color: #666;
+}
+
+.temporary-choice-status-info {
+  color: #4a90e2;
+}
+
+.temporary-choice-details-section {
+  margin-top: 24px;
+}
+
+.temporary-choice-details-section h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 12px 0;
+}
+
+.temporary-choice-details-section p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+  white-space: pre-line;
+}
+
+.temporary-choice-inquiry-button {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 18px;
+  background-color: #075915;
+  color: white;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 16px;
+  border-radius: 12px;
+}

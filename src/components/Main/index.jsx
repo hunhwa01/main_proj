@@ -1,13 +1,14 @@
 import { useNavigate } from "react-router-dom"
 import "./Main.css"
+import Weather from "./weather";
 
 function Main() {
   const navigate = useNavigate()
 
   const handleClick = (item) => {
     switch (item) {
-      case "mbti":
-        navigate("/mbti")
+      case "dbti":
+        navigate("/DbtiPage")
         break
       case "walk":
         navigate("/WalkPage")
@@ -33,10 +34,10 @@ function Main() {
 
       <main>
         <div className="main-weather-section">
-          <h2>날씨</h2>
+          <Weather city="Seoul" />
         </div>
 
-        <div className="main-mbti-card clickable-card" onClick={() => handleClick("mbti")}>
+        <div className="main-mbti-card clickable-card" onClick={() => handleClick("dbti")}>
           <h2>우리 댕댕이의 멍BTI는?!</h2>
         </div>
 

@@ -33,7 +33,7 @@ function ResultLast() {
 
             <div className="resultlast-profile-section">
               <div className="resultlast-profile-circle resultlast-dog-photo">
-                <img src="/resultlasticons/dogavatar.png" alt="강아지사진" />
+                <img src="/dogprofile/dog.jpg" alt="강아지사진" />
               </div>
               <div className="resultlast-paw-prints">
                 <img
@@ -43,7 +43,7 @@ function ResultLast() {
                 />
               </div>
               <div className="resultlast-profile-circle resultlast-user-photo">
-                <img src="/resultlasticons/avatar.png" alt="프로필" />
+                <img src="/trainerprofile/trainer.jpg" alt="프로필" />
               </div>
             </div>
 

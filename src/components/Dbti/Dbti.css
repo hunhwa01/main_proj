@@ -1,0 +1,166 @@
+/* ✅ 전체 컨테이너 */
+.Dbti-test-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-color: #E8EAE8; /* Tailwind의 bg-gray-100 */
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* ✅ 헤더 */
+.Dbti-test-header {
+  width: 100%;
+  background-color: #ffffff;
+  height: auto;
+  min-height: 120px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* ✅ 헤더 내부 콘텐츠 */
+.Dbti-test-header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+/* ✅ 뒤로가기 아이콘 */
+.Dbti-test-back-icon {
+  width: 24px;
+  height: auto;
+  cursor: pointer;
+  margin: 8px 0 0 28px;
+}
+
+/* ✅ 제목 */
+.Dbti-test-header-content h1 {
+  font-size: 33px;
+  font-weight: bold;
+  color: #075915;
+  margin: 25px 0 0 28px;
+}
+
+/* ✅ 설명 문구 추가 */
+.Dbti-test-description {
+  margin: 0 0 0 28px;
+  font-size: 18px;
+  color: #565656;
+  margin-top: 8px;
+}
+
+/* ✅ 질문 박스 가로 줄임 */
+.choices-container {
+  max-width: 350px;
+}
+
+/* ✅ 진행도 바 */
+.progress-bar-container {
+  width: 90%;
+  max-width: 600px;
+  background-color: #d1d5db; /* Tailwind의 bg-gray-300 */
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.progress-bar {
+  height: 8px;
+  background-color: #075915; /* 변경된 색상 */
+  transition: all 0.3s ease;
+}
+
+/* ✅ 질문 번호 */
+.question-number {
+  font-size: 1.125rem; /* Tailwind의 text-lg */
+  font-weight: 600; /* Tailwind의 font-semibold */
+  color: #4b5563; /* Tailwind의 text-gray-600 */
+  margin-top: 1.5rem; /* Tailwind의 mt-6 */
+}
+
+/* ✅ 질문 텍스트 */
+.question-text {
+  font-size: 1.5rem; /* Tailwind의 text-2xl */
+  font-weight: bold;
+  color: #111827; /* Tailwind의 text-gray-900 */
+  text-align: center;
+  margin: 1rem 0;
+}
+
+/* ✅ 선택 버튼 컨테이너 */
+.choices-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Tailwind의 gap-4 */
+  width: 100%;
+  max-width: 350px;
+  margin-top: 1.5rem; /* Tailwind의 mt-6 */
+}
+
+/* ✅ 선택 버튼 */
+.choice-button {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.125rem; /* Tailwind의 text-lg */
+  font-weight: 600; /* Tailwind의 font-semibold */
+  color: white;
+  background-color: #075915; /* 변경된 색상 */
+  border-radius: 0.5rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.choice-button:hover {
+  background-color: #064d10; /* 변경된 색상 */
+}
+
+/* ✅ 선택된 버튼 스타일 */
+.choice-button.selected {
+  background-color: #053f0e; /* 변경된 색상 */
+}
+
+/* ✅ 다음 버튼 */
+.next-button {
+  margin-top: 2rem;
+  padding: 0.8rem 2rem;
+  background-color: #075915; /* 변경된 색상 */
+  color: white;
+  font-size: 14px;
+  font-weight: 600; /* Tailwind의 font-semibold */
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: none;
+}
+
+.next-button:hover {
+  background-color: #064d10; /* 변경된 색상 */
+}
+
+/* ✅ 선택하지 않으면 비활성화 */
+.next-button.disabled {
+  background-color: #9ca3af; /* Tailwind의 bg-gray-400 */
+  cursor: not-allowed;
+}
+
+/* ✅ 메인 컨테이너 스타일 */
+.test-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin-top: 20px;
+}

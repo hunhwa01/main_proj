@@ -1,0 +1,173 @@
+/* 전체 컨테이너 */
+.lastreview-container {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    background-color: #e5e5e5;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* 고정된 헤더 */
+  .lastreview-header {
+    background-color: #fff;
+    height: auto;
+    min-height: 120px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  /* 헤더 내부 콘텐츠 */
+  .lastreview-header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  /* 뒤로가기 아이콘 */
+  .lastreview-back-icon {
+    width: 24px;
+    height: auto;
+    cursor: pointer;
+    margin: 10px 0 0 0;
+  }
+  
+  /* 제목 스타일 */
+  .lastreview-header-content h1 {
+    font-size: 33px;
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0 0 0;
+  }
+  
+  /* 스크롤 가능한 리뷰 카드 컨테이너 */
+  .lastreview-scrollable-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    height: calc(100vh - 13vh); /* 헤더를 제외한 높이 */
+    padding-bottom: 20px; /* 버튼과 하단 간격 */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* 리뷰 카드 스타일 */
+  .lastreview-review-card {
+    background-color: #fff;
+    margin: 20px 20px 0; /* 상단과 좌우 여백 */
+    padding: 24px;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* 트레이너 프로필 섹션 */
+  .lastreview-trainer-profile {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  
+  .lastreview-trainer-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  
+  .lastreview-trainer-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .lastreview-trainer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .lastreview-trainer-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  /* 평점 입력 섹션 */
+  .lastreview-rating-input {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .lastreview-rating-label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .lastreview-rating-number {
+    width: 60px;
+    padding: 8px;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  /* Chrome, Safari, Edge, Opera에서 화살표 제거 */
+  .lastreview-rating-number::-webkit-outer-spin-button,
+  .lastreview-rating-number::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  /* 리뷰 입력 컨테이너 */
+  .lastreview-review-input-container {
+    margin-bottom: 20px;
+  }
+  
+  .lastreview-review-textarea {
+    width: 100%;
+    min-height: 200px;
+    padding: 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 16px;
+    resize: none;
+    box-sizing: border-box;
+  }
+  
+  .lastreview-review-textarea::placeholder {
+    color: #9ca3af;
+  }
+  
+  /* 제출 버튼 */
+  .lastreview-submit-review-btn {
+    width: calc(100% - 40px); /* 좌우 여백을 고려한 너비 */
+    padding: 12px;
+    background-color: #075915;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin: 20px auto 0; /* 상단 여백과 중앙 정렬 */
+  }
+  
+  .lastreview-submit-review-btn:hover {
+    background-color: #064012;
+  }
+  
+  

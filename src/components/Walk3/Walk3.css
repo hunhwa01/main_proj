@@ -1,0 +1,209 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.Walk3-container {
+  height: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background-color: #e8eae8;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* 스크롤바 스타일링 */
+.Walk3-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.Walk3-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.Walk3-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.Walk3-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Header Section */
+.Walk3-header {
+  padding: 20px;
+  background-color: white;
+}
+
+.Walk3-back-button {
+  padding: 8px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.Walk3-title {
+  font-size: 24px;
+  font-weight: 500;
+  margin-top: 24px;
+  line-height: 1.4;
+}
+
+/* Calendar Section */
+.Walk3-calendar-wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.Walk3-calendar-section {
+  background-color: white;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+/* Month Selector */
+.Walk3-month-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.Walk3-month-arrow {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.Walk3-month-text {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* Calendar */
+.Walk3-calendar {
+  width: 100%;
+}
+
+/* Weekdays */
+.Walk3-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.Walk3-weekday {
+  font-size: 14px;
+  color: #666;
+  padding: 8px 0;
+}
+
+/* Dates Grid */
+.Walk3-dates {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.Walk3-week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+/* Date Buttons */
+.Walk3-date {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: black;
+}
+
+.Walk3-date:not(.Walk3-past):hover {
+  background-color: rgba(7, 89, 21, 0.1);
+}
+
+/* Past Date */
+.Walk3-date.Walk3-past {
+  color: #dadada;
+  cursor: not-allowed;
+}
+
+/* Selected Date */
+.Walk3-date.Walk3-selected {
+  background-color: #075915;
+  color: white;
+}
+
+/* Today's Date */
+.Walk3-date.Walk3-today {
+  border: 2px solid #075915;
+  font-weight: bold;
+}
+
+.Walk3-date.Walk3-today:not(.Walk3-selected):hover {
+  background-color: rgba(7, 89, 21, 0.2);
+}
+
+.Walk3-bottom-section {
+  margin-top: auto;
+  background-color: white;
+}
+
+.Walk3-bottom-content {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Walk3-confirm-text {
+  font-size: 14px;
+  color: #666;
+}
+
+.Walk3-next-button {
+  background-color: #006400;
+  color: white;
+  padding: 16px 32px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 500px) {
+  .Walk3-container {
+    width: 100%;
+  }
+}
+

@@ -1,0 +1,176 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.Price-container {
+  height: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #e8eae8;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* iOS 스크롤 개선 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* 스크롤바 스타일링 */
+.Price-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.Price-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.Price-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.Price-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.Price-header {
+  padding: 20px;
+  background-color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.Price-back-button {
+  padding: 8px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.Price-title {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 20px 0 0 0;
+}
+
+.Price-duration-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+  justify-items: center;
+}
+
+.Price-duration-button {
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: none;
+  background-color: #d9d9d9;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  width: 100%;
+}
+
+.Price-duration-button.selected {
+  background-color: #006400;
+  color: white;
+}
+
+.Price-info-section {
+  padding: 0 20px;
+}
+
+.Price-info-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.Price-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #075915;
+}
+
+.Price-dog-type {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.Price-dog-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.Price-size-desc {
+  color: #666;
+  font-size: 14px;
+  margin-left: 4px;
+}
+
+.Price-amount {
+  color: #075915;
+  font-weight: 500;
+}
+
+.Price-notice {
+  margin: 20px 0;
+  color: #565656;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.Price-additional-service {
+  margin-top: 32px;
+  padding-bottom: 32px;
+}
+
+.Price-section-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.Price-service-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #075915;
+}
+
+.Price-service-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.Price-clock-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.Price-service-notice {
+  margin-top: 16px;
+  color: #565656;
+  font-size: 14px;
+}
+
+@media (max-width: 500px) {
+  .Price-container {
+    width: 100%;
+  }
+}
+

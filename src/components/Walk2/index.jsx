@@ -1,124 +1,124 @@
-import React, { useState } from "react";
+"use client";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { geocodeByPlaceId } from "react-google-places-autocomplete";
 import "./Walk2.css";
 
 export default function Walk2() {
-  const [address, setAddress] = useState("");
+  const navigate = useNavigate();
   const [selectedPlace, setSelectedPlace] = useState(null);
+  const [coordinates, setCoordinates] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [apiKey, setApiKey] = useState("");
 
-  const handleInputChange = (e) => {
-    setAddress(e.target.value);
+  // ✅ API Key가 undefined인지 확인 (환경변수에서 불러오기)
+  useEffect(() => {
+    if (!process.env.REACT_APP_GOOGLE_API_KEY) {
+      console.error("🚨 Google API Key가 설정되지 않았습니다!");
+      setError("Google API Key가 누락되었습니다.");
+    } else {
+      setApiKey(process.env.REACT_APP_GOOGLE_API_KEY);
+      console.log("✅ Google API Key 로드됨:", process.env.REACT_APP_GOOGLE_API_KEY);
+    }
+  }, []);
+
+  // 📌 주소 선택 시 좌표 변환
+  const handlePlaceSelect = async (place) => {
+    setSelectedPlace(place);
+    setError(null);
+
+    if (place && place.value && place.value.place_id) {
+      try {
+        const geoData = await geocodeByPlaceId(place.value.place_id);
+        if (geoData.length > 0) {
+          const location = geoData[0].geometry.location;
+          setCoordinates({ lat: location.lat(), lng: location.lng() });
+        }
+      } catch (error) {
+        console.error("좌표 변환 오류:", error);
+        setError("좌표 변환에 실패했습니다.");
+      }
+    }
   };
 
+  // 📌 FastAPI 서버로 주소 저장 요청
   const handleSubmit = async () => {
-    if (!address.trim()) {
-      alert("주소를 입력해주세요!");
+    if (!selectedPlace || !coordinates) {
+      alert("주소를 선택해주세요!");
       return;
     }
 
     setLoading(true);
     setError(null);
 
+    const requestData = {
+      address: selectedPlace.label,
+      latitude: coordinates.lat,
+      longitude: coordinates.lng,
+    };
+
+    console.log("📤 서버로 보낼 데이터:", requestData);
+
     try {
-      // 선택된 주소에서 place_id 가져오기
-      const placeId = selectedPlace?.value?.place_id;
-      if (!placeId) throw new Error("유효한 주소를 선택해주세요!");
-      
-      const geoData = await geocodeByPlaceId(placeId);
-      if (!geoData || geoData.length === 0) {
-          throw new Error("좌표 데이터를 찾을 수 없습니다.");
-      }
-      const location = geoData[0].geometry.location;
-
-      const requestData = {
-        address: selectedPlace.label,
-        latitude: location.lat(),
-        longitude: location.lng(),
-      };
-
-      // 주소 저장 API 호출
-      const saveResponse = await fetch("http://127.0.0.1:8000/api/address/save-address", {
+      const response = await fetch("http://127.0.0.1:8000/api/address/save-address", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(requestData),
       });
 
-      if (!saveResponse.ok) throw new Error("주소 저장 실패");
+      if (!response.ok) {
+        throw new Error("서버 오류: 응답이 실패함");
+      }
 
-      alert("주소가 정상적으로 저장되었습니다!");
+      alert("✅ 주소가 정상적으로 저장되었습니다!");
+      navigate("/Walk3Page");
     } catch (error) {
-      setError(error.message);
+      console.error("주소 저장 실패:", error);
+      setError("주소 저장에 실패했습니다.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="walk2-container">
-      <div className="white-section">
-        <div className="header">
-          <button className="back-button">←</button>
-          <h1 className="title">
-            어디로 
-            <br />
-            방문하면 될까요?
-          </h1>
+    <div className="Walk2-container">
+      <h1>주소 자동완성 + 좌표 변환 + 서버 전송</h1>
+
+      {/* ✅ Google Places Autocomplete (API Key 체크 추가) */}
+      {apiKey ? (
+        <GooglePlacesAutocomplete
+          apiKey={apiKey}
+          selectProps={{
+            value: selectedPlace,
+            onChange: handlePlaceSelect,
+            placeholder: "주소를 입력하세요...",
+          }}
+        />
+      ) : (
+        <p style={{ color: "red" }}>⚠️ Google API Key가 설정되지 않았습니다.</p>
+      )}
+
+      {selectedPlace && (
+        <div>
+          <h3>선택된 주소:</h3>
+          <p>{selectedPlace.label}</p>
         </div>
-        <div className="input-group">
-          <label htmlFor="address" className="input-label">
-            주소
-          </label>
+      )}
 
-          {/* Google Places Autocomplete 입력 필드 */}
-          <GooglePlacesAutocomplete
-            apiKey={process.env.REACT_APP_GOOGLE_API_KEY}
-            selectProps={{
-              value: selectedPlace || null,
-              onChange: (place) => {
-                setSelectedPlace(place); // 전체 객체 저장 (주소 변환용)
-                setAddress(place.label); // 문자열만 저장 (입력 필드 표시용)
-              },
-              placeholder: "주소를 입력하세요",
-            }}
-          />
-
-          <input type="text" id="address" className="input-field" placeholder="주소를 입력해주세요"
-            value={address}
-            onChange={handleInputChange}
-          />
-
-          <label htmlFor="contact" className="input-label">
-            연락처
-          </label>
-          <input type="text" id="contact" className="input-field" placeholder="연락처를 입력해주세요" />
+      {coordinates && (
+        <div>
+          <h3>위도: {coordinates.lat}</h3>
+          <h3>경도: {coordinates.lng}</h3>
         </div>
-      </div>
+      )}
 
-      {/* Q&A Section */}
-      <div className="qa-section">
-        <h2 className="qa-title">Q. 예약이 불가능한 주소라고 떠요</h2>
-        <p className="qa-content">
-          현재 고객님께서 계신 지역은 아쉽게도 아직 서비스
-          <br />
-          가능 지역에 포함되지 않아 서비스 이용이 어렵습니다.
-        </p>
-      </div>
+      <button onClick={handleSubmit} disabled={loading}>
+        {loading ? "저장 중..." : "주소 저장"}
+      </button>
 
-      {/* Bottom Section */}
-      <div className="bottom-section">
-        <div className="bottom-content">
-          <p className="confirm-text">
-            방문 주소를
-            <br />
-            확인해주세요
-          </p>
-          <button className="next-button" onClick={handleSubmit} disabled={loading}>다음으로</button>
-        </div>
-      </div>
-      {error && <p className="error-message">오류: {error}</p>}
+      {error && <p style={{ color: "red" }}>오류: {error}</p>}
     </div>
   );
 }
