@@ -4,6 +4,7 @@ from backend.database import get_db
 from backend.models.address import Address
 from backend.schemas.address import AddressCreate
 from backend.services.address import save_address_to_db, get_all_addresses
+from sqlalchemy.future import select
 
 router = APIRouter()
 
@@ -16,13 +17,11 @@ async def save_address(address: AddressCreate, db: AsyncSession = Depends(get_db
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-@router.get("/get-addresses")
-async def get_addresses(db: AsyncSession = Depends(get_db)):
-    """
-    DB에 저장된 모든 주소 목록 조회 API
-    """
+@router.get("/addresses")
+async def get_addresses(session: AsyncSession = Depends(get_db)):  # ✅ 변경된 get_db 사용
     try:
-        addresses = await get_all_addresses(db)
-        return {"message": "주소 목록 조회 성공", "data": addresses}
+        result = await session.execute(select(Address))
+        addresses = result.scalars().all()
+        return [{"latitude": addr.latitude, "longitude": addr.longitude} for addr in addresses]
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

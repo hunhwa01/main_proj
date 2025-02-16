@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float, MetaData
+from sqlalchemy import MetaData
 from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from dotenv import load_dotenv
@@ -9,13 +9,14 @@ load_dotenv()
 
 DATABASE_URL = os.getenv("SUPABASE_DB_URL")
 
-engine = create_async_engine(DATABASE_URL, echo=True, connect_args={"statement_cache_size": 0})
+engine = create_async_engine(
+    DATABASE_URL, 
+    echo=True, 
+    connect_args={"statement_cache_size": 0}
+)
 
 # 전역적으로 MetaData를 관리 (중복 정의 방지)
 metadata = MetaData()
-
-# 세션 팩토리 생성 (비동기 → 동기 변경)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # 비동기 세션 설정
 AsyncSessionLocal = sessionmaker(

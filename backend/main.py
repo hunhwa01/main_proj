@@ -5,8 +5,12 @@ from backend.routers import users, Dbti_router
 from fastapi.responses import Response
 from backend.routers.address import router as address_router
 from backend.routers.google_places import router as google_places_router  # Google Places 라우터 임포트
+import os
+import httpx
 
 app = FastAPI()
+
+TMAP_API_KEY = os.getenv("TMAP_API_KEY")
 
 # ✅ CORS 설정 추가
 app.add_middleware(
@@ -24,6 +28,31 @@ async def root():
 @app.get("/favicon.ico", include_in_schema=False)
 async def favicon():
     return Response(status_code=204)
+
+# ✅ T맵 도보 길찾기 API 프록시
+@app.get("/proxy/tmap-route")
+async def get_tmap_route(start: str, goal: str):
+    url = f"https://apis.openapi.sk.com/tmap/routes/pedestrian?version=1"
+    headers = {
+        "appKey": TMAP_API_KEY,
+        "Content-Type": "application/json",
+    }
+    
+    payload = {
+        "startX": start.split(",")[0],
+        "startY": start.split(",")[1],
+        "endX": goal.split(",")[0],
+        "endY": goal.split(",")[1],
+        "reqCoordType": "WGS84GEO",
+        "resCoordType": "EPSG3857",
+        "startName": "출발지",
+        "endName": "목적지",
+    }
+
+    async with httpx.AsyncClient() as client:
+        response = await client.post(url, headers=headers, json=payload)
+        return response.json()
+
 
 # 라우터 등록
 app.include_router(users.router)
