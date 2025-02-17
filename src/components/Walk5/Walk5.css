@@ -15,7 +15,7 @@ html {
   background-color: #e8eae8;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -107,9 +107,30 @@ html {
   cursor: pointer;
 }
 
-.Walk5-edit-button img {
+.Walk5-checkbox {
+  appearance: none;
   width: 24px;
   height: 24px;
+  border: 2px solid #006400;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.Walk5-checkbox:checked {
+  background-color: #006400;
+  position: relative;
+}
+
+.Walk5-checkbox:checked::after {
+  content: '\2713';
+  font-size: 16px;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* Request Section */
@@ -174,4 +195,3 @@ html {
     width: 100%;
   }
 }
-

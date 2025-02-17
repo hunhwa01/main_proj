@@ -22,14 +22,14 @@ export default function Walk5() {
       <div className="Walk5-content">
         <div className="Walk5-profile-card">
           <div className="Walk5-profile-image">
-            <img src="/placeholder.svg" alt="반려동물 프로필" width={64} height={64} />
+            <img src="/dogprofile/dog.jpg" alt="반려동물 프로필" width={64} height={64} />
           </div>
           <div className="Walk5-profile-info">
             <div className="Walk5-name">이름</div>
             <div className="Walk5-details">소형견 · 개월수 · 성별</div>
           </div>
           <button className="Walk5-edit-button">
-            <img src="/placeholder.svg" alt="수정" width={24} height={24} />
+            <input type="checkbox" className="Walk5-checkbox" defaultChecked />
           </button>
         </div>
 
@@ -40,7 +40,7 @@ export default function Walk5() {
       </div>
 
       <div className="Walk5-bottom-section">
-        <button className="Walk5-next-button" onClick={() => navigate("/NextPage")}>
+        <button className="Walk5-next-button" onClick={() => navigate("/Reservation1Page")}>
           다음으로
         </button>
       </div>

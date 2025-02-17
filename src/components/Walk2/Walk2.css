@@ -15,7 +15,7 @@ html {
   background-color: #e8eae8;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -42,7 +42,6 @@ html {
 
 .Walk2-white-section {
   background-color: white;
-  margin-bottom: 20px;
 }
 
 .Walk2-header {
@@ -109,9 +108,25 @@ html {
   line-height: 1.5;
 }
 
+.Walk2-error-message {
+  background-color: #ffebee;
+  color: #d32f2f;
+  padding: 10px;
+  margin: 0;
+  font-size: 14px;
+  text-align: center;
+}
+
+.Walk2-input-error {
+  background-color: #fff3e0;
+  color: #e65100;
+}
+
 .Walk2-bottom-section {
   margin-top: auto;
   background-color: white;
+  display: flex;
+  flex-direction: column;
 }
 
 .Walk2-bottom-content {
@@ -135,9 +150,44 @@ html {
   cursor: pointer;
 }
 
+.Walk2-next-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
 @media (max-width: 500px) {
   .Walk2-container {
     width: 100%;
   }
 }
 
+/* Google Places Autocomplete 스타일 오버라이드 */
+.css-13cymwt-control {
+  border-color: #ccc !important;
+  box-shadow: none !important;
+}
+
+.css-13cymwt-control:hover {
+  border-color: #075915 !important;
+}
+
+.css-13cymwt-control:focus-within,
+.css-t3ipsp-control {
+  border-color: #075915 !important;
+  box-shadow: 0 0 0 1px #075915 !important;
+}
+
+/* 옵션에 마우스를 올렸을 때의 스타일 */
+.css-1n6sfyn-MenuList > div:hover {
+  background-color: rgba(7, 89, 21, 0.1) !important;
+}
+
+/* 선택된 옵션의 스타일 */
+.css-1n6sfyn-MenuList > div[aria-selected="true"] {
+  background-color: rgba(7, 89, 21, 0.2) !important;
+}
+
+/* 입력 필드 placeholder 스타일 */
+.css-13cymwt-control .css-1wa3eu0-placeholder {
+  color: #757575;
+}
