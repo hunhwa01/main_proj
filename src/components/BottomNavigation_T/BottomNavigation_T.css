@@ -1,0 +1,60 @@
+/* 하단바 전체 스타일 */
+.bottom-navigation {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px; /* 하단바 높이를 적절히 설정 */
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 10;
+  }
+  
+  /* 하단바 항목 스타일 */
+  .nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column; /* 세로 정렬 */
+    align-items: center; /* 가운데 정렬 */
+    justify-content: center;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    padding: 10px 0; /* 텍스트와 이미지 간 여백 */
+    transition: background-color 0.3s ease, color 0.3s ease, filter 0.3s ease;
+  }
+  
+  /* 기본 이미지 스타일 */
+  .nav-icon {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 5px;
+    transition: filter 0.3s ease; /* 이미지 변경을 부드럽게 */
+  }
+  
+  /* 마우스를 올렸을 때 초록색으로 변경 (클릭된 항목 제외) */
+  .nav-item:hover:not(.active) .nav-icon {
+    filter: brightness(0) saturate(100%) invert(38%) sepia(81%) saturate(305%) hue-rotate(85deg) brightness(93%) contrast(89%);
+  }
+  
+  /* 마우스를 올렸을 때 텍스트 색상 변경 (클릭된 항목 제외) */
+  .nav-item:hover:not(.active) {
+    color: #075915;
+    background-color: #fff;
+  }
+  
+  /* 클릭된 항목 (active 상태) */
+  .nav-item.active {
+    color: #075915; /* 텍스트를 초록색으로 변경 */
+    background-color: transparent; /* 배경색 투명 */
+  }
+  
+  .nav-item.active .nav-icon {
+    filter: brightness(0) saturate(100%) invert(38%) sepia(81%) saturate(305%) hue-rotate(85deg) brightness(93%) contrast(89%);
+  }
+  

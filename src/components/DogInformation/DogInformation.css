@@ -52,7 +52,7 @@
 
 .doginformation-content {
   flex: 1;
-  background-color: #e5e5e5;
+  background-color: #E8EAE8;
   padding: 20px;
   overflow-y: auto;
 }
@@ -168,15 +168,18 @@
 }
 
 .doginformation-submit-button {
-  width: 100%;
+  width: 65%;
   padding: 12px;
   background-color: #2b5b40;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 25px;
   font-size: 16px;
   cursor: pointer;
-  margin-top: 20px;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 .doginformation-submit-button:hover {

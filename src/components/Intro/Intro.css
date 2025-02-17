@@ -1,0 +1,60 @@
+.Intro-container {
+    min-height: 100vh;
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #075915;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .Intro-logo {
+    margin-bottom: 80px;
+    text-align: center;
+  }
+  
+  .Intro-paw-image {
+    width: 350px;
+    height: auto;
+  }
+  
+  .Intro-title {
+    color: white;
+    font-size: 48px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .Intro-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  .Intro-button {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 100px;
+    background-color: white;
+    color: #075915;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+  }
+  
+  .Intro-button:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-1px);
+  }
+  
+  .Intro-button:active {
+    transform: translateY(0);
+  }
+  
+  

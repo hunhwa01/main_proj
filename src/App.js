@@ -39,6 +39,17 @@ import Walk4Page from './pages/Walk4Page'
 import Walk5Page from './pages/Walk5Page'
 import PricePage from './pages/PricePage';
 
+import IntroPage from './pages/IntroPage';
+
+// 트레이너 페이지
+import Reservation_TPage from './pages/Reservation_TPage';
+import Last_TPage from './pages/Last_TPage';
+import Profile_TPage from './pages/Profile_TPage';
+import TrainerInformationPage from './pages/TrainerInformationPage';
+import Review_TPage from './pages/Review_TPage';
+import Like_TPage from './pages/Like_TPage';
+
+
 function App() {
   return (
       <Routes>
@@ -80,7 +91,21 @@ function App() {
         <Route path="/Walk5Page" element={<Walk5Page/>} />
         <Route path="/PricePage" element={<PricePage/>} />
 
+        <Route path="/IntroPage" element={<IntroPage/>} />
+
+
+        // 트레이너 페이지
+        <Route path="/Reservation_TPage" element={<Reservation_TPage/>} />
+        <Route path="/Last_TPage" element={<Last_TPage/>} />
+        <Route path="/Profile_TPage" element={<Profile_TPage/>} />
+        <Route path="/TrainerInformationPage" element={<TrainerInformationPage/>} />
+        <Route path="/Review_TPage" element={<Review_TPage/>} />
+        <Route path="/Like_TPage" element={<Like_TPage/>} />
+
+
+
       </Routes>
+    
   );
 }
 

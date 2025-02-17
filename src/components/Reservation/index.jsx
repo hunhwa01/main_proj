@@ -26,7 +26,7 @@ function Reservation() {
       {/* 메인 컨텐츠 */}
       <div className="reservation-chat-message">
         <div>아직 예약이 없습니다.</div>
-        <Link to="/Reservation1Page" className="reservation-match-button">
+        <Link to="/WalkPage" className="reservation-match-button">
           산책예약
         </Link>
       </div>

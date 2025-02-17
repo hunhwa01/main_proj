@@ -31,7 +31,7 @@ function Profile() {
         </div>
       </a>
       {/* 트레이너 모드로 전환 */}
-      <a href="/trainer-mode" className="profile-footer">
+      <a href="/Main_TPage" className="profile-footer">
         <span className="profile-trainer-mode-text">트레이너 모드로 전환</span>
         <img
           src="/profileicons/switch.png"

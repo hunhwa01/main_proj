@@ -1,0 +1,117 @@
+.trainerinformation-container {
+    min-height: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .trainerinformation-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+    background-color: white;
+  }
+  
+  .trainerinformation-back-button {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .trainerinformation-back-icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .trainerinformation-image-container {
+    margin-top: 10px;
+  }
+  
+  .trainerinformation-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .trainerinformation-text {
+    color: #666;
+    font-size: 16px;
+  }
+  
+  .trainerinformation-content {
+    flex: 1;
+    background-color: #e8eae8;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  
+  .trainerinformation-form-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .trainerinformation-form-group {
+    margin-bottom: 16px;
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  .trainerinformation-label {
+    width: 80px;
+    flex-shrink: 0;
+    color: #333;
+    padding-top: 6px;
+  }
+  
+  .trainerinformation-form-input {
+    flex-grow: 1;
+    padding: 6px 0;
+    border: none;
+    border-bottom: 1px solid #075915;
+    background-color: transparent;
+    font-size: 14px;
+    outline: none;
+    min-height: 28px;
+    line-height: 20px;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  
+  .trainerinformation-form-input:focus {
+    border-bottom-width: 2px;
+  }
+  
+  .trainerinformation-submit-button {
+    width: 65%;
+    padding: 12px;
+    background-color: #2b5b40;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+  
+  .trainerinformation-submit-button:hover {
+    background-color: #224732;
+  }
+  
+  

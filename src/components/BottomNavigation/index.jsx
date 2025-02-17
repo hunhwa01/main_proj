@@ -1,12 +1,30 @@
-import { useState } from "react"
+"use client"
+
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import "./BottomNavigation.css"
 
 function BottomNavigation() {
   const [activeItem, setActiveItem] = useState("")
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const navigate = useNavigate()
 
+  // ✅ 로그인 상태 확인 (토큰 키값 수정)
+  useEffect(() => {
+    const token = localStorage.getItem("token")
+    console.log("로그인 토큰:", token) // 🔥 디버깅용 로그
+    setIsLoggedIn(!!token)
+  }, [])
+
   const handleClick = (item) => {
+    console.log("현재 로그인 상태:", isLoggedIn) // 🔥 디버깅용 로그
+
+    if (!isLoggedIn) {
+      console.log("로그인 필요! 인트로페이지로 이동")
+      navigate("/IntroPage")
+      return
+    }
+
     setActiveItem(item)
     console.log(`${item} 클릭됨`)
     switch (item) {

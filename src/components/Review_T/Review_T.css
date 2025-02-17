@@ -1,0 +1,186 @@
+/* 전체 컨테이너 */
+.review-t-container {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    background-color: #E8EAE8;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* 고정된 헤더 */
+  .review-t-header {
+    background-color: #fff;
+    height: auto;
+    min-height: 120px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  /* 헤더 내부 콘텐츠 */
+  .review-t-header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  /* 뒤로가기 아이콘 */
+  .review-t-back-icon {
+    width: 24px;
+    height: auto;
+    cursor: pointer;
+    margin: 10px 0 0 0;
+  }
+  
+  /* 제목 스타일 */
+  .review-t-header-content h1 {
+    font-size: 33px;
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0 0 0;
+  }
+
+  .review-t-year-button {
+    background-color: #fff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #565656;
+    cursor: pointer;
+    width: auto;
+    margin-top: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+  }
+  
+  .review-t-year-button:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .review-t-year-button-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+  }
+  
+  .review-t-chat-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 20vh - 30px);
+    font-size: 18px;
+    color: #666;
+    margin-top: 20px;
+  }
+  
+  .year-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 10;
+  }
+  
+  .year-option {
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .year-option:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .reservation-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reservation-time {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 15px;
+  }
+  
+  .dog-info {
+    display: flex;
+    align-items: left;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .dog-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .dog-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #e5e5e5;
+    overflow: hidden;
+  }
+  
+  .dog-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .dog-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .dog-name {
+    font-size: 16px;
+    color: #333;
+  }
+
+  .dog-rating {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .review-box {
+    margin-top: 15px;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    min-height: 100px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+  }
+  
+  .reservation-list {
+    padding: 20px 0;
+  }

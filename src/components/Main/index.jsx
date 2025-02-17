@@ -1,28 +1,46 @@
-import { useNavigate } from "react-router-dom"
-import "./Main.css"
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import "./Main.css";
 import Weather from "./weather";
 
 function Main() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  // ✅ 로그인 상태 확인 (토큰 키값 수정)
+  useEffect(() => {
+    const token = localStorage.getItem("token"); // 🔥 "authToken"이 아니라 "token" 확인
+    console.log("로그인 토큰:", token); // 🔥 디버깅용 로그
+    setIsLoggedIn(!!token);
+  }, []);
+
+  // ✅ 버튼 클릭 핸들러 (로그인 체크 후 이동)
   const handleClick = (item) => {
+    console.log("현재 로그인 상태:", isLoggedIn); // 🔥 디버깅용 로그
+
+    if (!isLoggedIn) {
+      console.log("로그인 필요! 인트로페이지로 이동");
+      navigate("/IntroPage");
+      return;
+    }
+
     switch (item) {
       case "dbti":
-        navigate("/DbtiPage")
-        break
+        navigate("/DbtiPage");
+        break;
       case "walk":
-        navigate("/WalkPage")
-        break
+        navigate("/WalkPage");
+        break;
       case "temporarycare":
-        navigate("/TemporaryCarePage")
-        break
+        navigate("/TemporaryCarePage");
+        break;
       case "review":
-        navigate("/ReviewPage")
-        break
+        navigate("/ReviewPage");
+        break;
       default:
-        console.log("Unknown item")
+        console.log("Unknown item");
     }
-  }
+  };
 
   return (
     <div className="main-container" style={{ minHeight: "100%", overflowY: "auto" }}>
@@ -63,8 +81,7 @@ function Main() {
         </div>
       </main>
     </div>
-  )
+  );
 }
 
-export default Main
-
+export default Main;

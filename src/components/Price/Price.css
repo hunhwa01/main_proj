@@ -13,7 +13,7 @@ html {
   background-color: #e8eae8;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch; /* iOS 스크롤 개선 */
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -106,18 +106,26 @@ html {
 .Price-dog-type {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 }
 
-.Price-dog-icon {
-  width: 24px;
-  height: 24px;
+.Price-dog-icon-container {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Price-dog-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .Price-size-desc {
   color: #666;
   font-size: 14px;
-  margin-left: 4px;
 }
 
 .Price-amount {
@@ -172,5 +180,15 @@ html {
   .Price-container {
     width: 100%;
   }
+}
+
+.Price-dog-icon.small-dog {
+  width: 20px;
+  height: 20px;
+}
+
+.Price-dog-icon.large-dog {
+  width: 28px;
+  height: 28px;
 }
 

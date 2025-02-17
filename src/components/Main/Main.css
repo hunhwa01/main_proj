@@ -19,7 +19,7 @@ body {
   flex-direction: column;
   height: calc(100% - 100px); /* BottomNavigation 높이를 뺌 */
   padding-bottom: 100px; /* BottomNavigation 높이만큼 패딩 추가 */
-  background-color: #e5e5e5;
+  background-color: #E8EAE8;
   box-sizing: border-box;
   padding: 0 0 20px 0; /* 하단에 20px 패딩 추가 */
   margin: 0;

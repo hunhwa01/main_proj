@@ -75,8 +75,9 @@
 /* 강아지 카드 그리드 스타일 */
 .dogs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 24px; /* Increased from 16px to 24px for more spacing */
+  grid-template-columns: repeat(2, 1fr); /* 2x2 그리드 */
+  gap: 24px;
+  padding: 20px;
 }
 
 /* 스크롤바 스타일링 */
@@ -96,4 +97,5 @@
 .TemporaryCare-main-content::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
 

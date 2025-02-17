@@ -1,6 +1,6 @@
 .signup2-container {
   min-height: 100vh;
-  background-color: #e5e5e5;
+  background-color: #e8eae8;
   padding: 20px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
     "Helvetica Neue", sans-serif;
@@ -77,7 +77,7 @@
     width: 100%;
     padding: 12px 0;
     border: none;
-    border-bottom: 1px solid #075915;
+    border-bottom: 2px solid #075915;
     background: transparent;
     font-size: 16px;
     outline: none;

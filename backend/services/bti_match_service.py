@@ -3,7 +3,7 @@ import pandas as pd
 from supabase import create_client, Client
 
 # 유틸 함수 (MBTI 점수 계산 관련) – 기존 코드의 함수를 그대로 사용
-from utils.bti_data import get_mbti_match_score, calculate_activity_match
+from backend.utils.bti_data import get_mbti_match_score, calculate_activity_match
 
 # === Supabase 설정 ===
 SUPABASE_URL = "https://ivymmfqgtgqcgfxblvnj.supabase.co"
@@ -17,7 +17,7 @@ model = xgb.Booster()
 model.load_model("ml/xgboost_mbti.json")
 
 # 학습 데이터에서 사용한 컬럼 로드 (CSV 경로는 실제 경로로 수정)
-df_train = pd.read_csv("data/mbti_matching_data_large.csv")
+df_train = pd.read_csv("backend/data/mbti_matching_data_large.csv")
 df_train = pd.get_dummies(df_train, columns=["pet_mbti", "trainer_mbti"])
 train_columns = df_train.drop(columns=["total_score"]).columns.tolist()
 
