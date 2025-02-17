@@ -34,7 +34,7 @@ const Map = () => {
         center: startPosition, // 지도 중심
         width: "100%",
         height: "500px",
-        zoom: 15,
+        zoom: 16,
       });
 
       setMap(newMap);
@@ -107,8 +107,7 @@ const Map = () => {
 
   return (
     <div>
-      <h1>📍 Tmap 출발지 & 목적지 + 경로</h1>
-      <div ref={mapRef} style={{ width: "100%", height: "500px" }} />
+      <div id="map" ref={mapRef} style={{ width: "100%", height: "100%" }} />
     </div>
   );
 };
