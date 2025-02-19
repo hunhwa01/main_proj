@@ -66,36 +66,27 @@ const Map = () => {
       console.log("📌 start 데이터:", start);
       console.log("📌 end 데이터:", end);
 
-      const convertToEPSG3857 = (lon, lat) => {
-        const radLat = (lat * Math.PI) / 180;
-        const radLon = (lon * Math.PI) / 180;
-        return {
-          x: radLon * 6378137.0,
-          y: Math.log(Math.tan((Math.PI / 4) + (radLat / 2))) * 6378137.0
-        };
-      };
-      
-      const startConverted = convertToEPSG3857(start.longitude, start.latitude);
-      const endConverted = convertToEPSG3857(end.longitude, end.latitude);
-
       const requestData = {
-        startX: startConverted.x,
-        startY: startConverted.y,
-        endX: endConverted.x,
-        endY: endConverted.y,
-        reqCoordType: "EPSG3857",
-        resCoordType: "EPSG3857",
+        startX: start.longitude.toFixed(6),
+        startY: start.latitude.toFixed(6),
+        endX: end.longitude.toFixed(6),
+        endY: end.latitude.toFixed(6),
+        reqCoordType: "WGS84GEO",
+        resCoordType: "WGS84GEO",
+        startName: "출발지", // ✅ 필수 파라미터 추가
+        endName: "목적지"
       };
 
       console.log("📌 요청할 API 데이터:", requestData);
 
       const headers = {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/json",
+        "appKey": TMAP_API_KEY,
       };
 
       const response = await axios.post(
-        `https://apis.openapi.sk.com/tmap/routes/pedestrian?version=1&appKey=${TMAP_API_KEY}`,
-        new URLSearchParams(requestData).toString(),
+        `https://apis.openapi.sk.com/tmap/routes/pedestrian?version=1`,
+        JSON.stringify(requestData),
         { headers }
       );
 
@@ -107,17 +98,16 @@ const Map = () => {
         return;
       }
 
-      // ✅ EPSG3857 좌표를 WGS84 좌표로 변환 후 폴리라인 그리기
       const drawInfoArr = [];
       for (let i = 0; i < resultData.length; i++) {
         const geometry = resultData[i].geometry;
         if (geometry.type === "LineString") {
           for (let j = 0; j < geometry.coordinates.length; j++) {
-            const latlng = new window.Tmapv2.Point(
-              geometry.coordinates[j][0],
-              geometry.coordinates[j][1]
+            const latLng = new window.Tmapv2.LatLng(
+              geometry.coordinates[j][1],
+              geometry.coordinates[j][0]
             );
-            drawInfoArr.push(latlng);
+            drawInfoArr.push(latLng);
           }
         }
       }
@@ -125,10 +115,7 @@ const Map = () => {
       console.log("📌 변환된 폴리라인 좌표 개수:", drawInfoArr.length);
       console.log("📌 변환된 폴리라인 좌표 목록:", drawInfoArr);
 
-      if (drawInfoArr.length === 0) {
-        console.error("🚨 폴리라인을 그릴 좌표가 없습니다.");
-        return;
-      }
+      if (polyline) polyline.setMap(null);
 
       // ✅ 기존 폴리라인 삭제
       if (polyline) {
