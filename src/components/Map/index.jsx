@@ -66,29 +66,41 @@ const Map = () => {
       console.log("📌 start 데이터:", start);
       console.log("📌 end 데이터:", end);
 
+      const convertToEPSG3857 = (lon, lat) => {
+        const radLat = (lat * Math.PI) / 180;
+        const radLon = (lon * Math.PI) / 180;
+        return {
+          x: radLon * 6378137.0,
+          y: Math.log(Math.tan((Math.PI / 4) + (radLat / 2))) * 6378137.0
+        };
+      };
+      
+      const startConverted = convertToEPSG3857(start.longitude, start.latitude);
+      const endConverted = convertToEPSG3857(end.longitude, end.latitude);
+
       const requestData = {
-        startX: String(start.longitude),
-        startY: String(start.latitude),
-        endX: String(end.longitude),
-        endY: String(end.latitude),
-        reqCoordType: "WGS84GEO",
-        resCoordType: "EPSG3857", // Tmap API는 EPSG3857 좌표계 반환
+        startX: startConverted.x,
+        startY: startConverted.y,
+        endX: endConverted.x,
+        endY: endConverted.y,
+        reqCoordType: "EPSG3857",
+        resCoordType: "EPSG3857",
       };
 
       console.log("📌 요청할 API 데이터:", requestData);
 
       const headers = {
-        "Content-Type": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
       };
 
       const response = await axios.post(
         `https://apis.openapi.sk.com/tmap/routes/pedestrian?version=1&appKey=${TMAP_API_KEY}`,
-        requestData,
+        new URLSearchParams(requestData).toString(),
         { headers }
       );
 
       const resultData = response.data.features;
-      console.log("🛤️ Tmap API 응답 데이터:", resultData);
+      console.log("Tmap API 응답 데이터:", resultData);
 
       if (!resultData || resultData.length === 0) {
         console.error("🚨 API 오류 또는 경로 데이터가 없습니다.", resultData);
@@ -105,11 +117,7 @@ const Map = () => {
               geometry.coordinates[j][0],
               geometry.coordinates[j][1]
             );
-
-            // ✅ 좌표 변환: EPSG3857 → WGS84
-            const convertPoint = new window.Tmapv2.Projection.convertEPSG3857ToWGS84GEO(latlng);
-            const convertChange = new window.Tmapv2.LatLng(convertPoint._lat, convertPoint._lng);
-            drawInfoArr.push(convertChange);
+            drawInfoArr.push(latlng);
           }
         }
       }

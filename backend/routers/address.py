@@ -22,6 +22,9 @@ async def get_addresses(session: AsyncSession = Depends(get_db)):  # ✅ 변경�
     try:
         result = await session.execute(select(Address))
         addresses = result.scalars().all()
+        print("DB에서 가져온 데이터:", addresses)
         return [{"latitude": addr.latitude, "longitude": addr.longitude} for addr in addresses]
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    finally:
+        await session.close()
