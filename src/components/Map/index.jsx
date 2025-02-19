@@ -132,8 +132,7 @@ const Map = () => {
         map: mapInstance,
         zIndex: 1000,
       });
-
-      newPolyline.setZIndex(1000);
+      
       setPolyline(newPolyline);
       console.log("🛤️ 변환된 보행자 경로 폴리라인 추가 완료:", newPolyline);
 
