@@ -4,7 +4,8 @@ from backend.routers import users, Dbti_router, auth
 from backend.routers.bti_match import router as bti_match
 from fastapi.responses import Response
 from backend.routers.address import router as address_router
-from backend.routers.google_places import router as google_places_router  # Google Places 라우터 임포트
+from backend.routers.google_places import router as google_places_router
+from backend.routers.gpt_router import router as gpt_router
 import os
 import httpx
 
@@ -60,3 +61,5 @@ app.include_router(bti_match, prefix="/api")
 app.include_router(Dbti_router.router, prefix="/api")
 app.include_router(address_router, prefix="/api/address", tags=["Address"])
 app.include_router(google_places_router, prefix="/api/places", tags=["Google Places"])
+app.include_router(gpt_router, prefix="/api/gpt", tags=["GPT-4o"])
+app.include_router(gpt_router, prefix="/api/walk", tags=["Walk"])
