@@ -5,7 +5,6 @@ import "./Reservation.css"
 function Reservation() {
   return (
     <div className="reservation-container" style={{ minHeight: "100%", overflowY: "auto" }}>
-      {/* 헤더 */}
       <header className="reservation-header">
         <div className="reservation-header-content">
           <h1>예약내역</h1>
@@ -23,7 +22,6 @@ function Reservation() {
           </div>
         </div>
       </header>
-      {/* 메인 컨텐츠 */}
       <div className="reservation-chat-message">
         <div>아직 예약이 없습니다.</div>
         <Link to="/WalkPage" className="reservation-match-button">

@@ -73,7 +73,6 @@ export default function Walk2() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          // 필요한 경우 여기에 인증 헤더를 추가하세요
         },
         body: JSON.stringify(requestData),
       })

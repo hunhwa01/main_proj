@@ -6,12 +6,19 @@ import "./Dog.css"
 export default function DogCard({ dog }) {
   const [isLiked, setIsLiked] = useState(false)
 
-  const handlePawClick = () => {
+  const handlePawClick = (e) => {
+    e.stopPropagation() // 이벤트 버블링 방지
     setIsLiked(!isLiked)
   }
 
+  const handleCardClick = () => {
+    if (dog.URL) {
+      window.open(dog.URL, "_blank")
+    }
+  }
+
   return (
-    <div className="dog-card">
+    <div className="dog-card" onClick={handleCardClick} style={{ cursor: "pointer" }}>
       <div className="dog-image">
         <img
           src={dog["이미지 URL"].split(";")[0] || "/placeholder.svg"}
@@ -36,4 +43,3 @@ export default function DogCard({ dog }) {
     </div>
   )
 }
-

@@ -10,7 +10,6 @@ function ResultLast() {
 
   return (
     <div className="resultlast-container" style={{height: '100%', overflowY: 'auto'}}>
-      {/* 헤더 (고정) */}
       <header className="resultlast-header">
         <div className="resultlast-header-content">
           <img
@@ -23,7 +22,6 @@ function ResultLast() {
         </div>
       </header>
 
-      {/* 스크롤 가능한 산책 리포트 카드 컨테이너 */}
       <div className="resultlast-scrollable-container">
         {/* 산책 리포트 카드 (반복) */}
         {[1, 2, 3].map((_, index) => (

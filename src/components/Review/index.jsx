@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import "./Review.css"
 
-// 예시 후기 데이터 수정 (tags를 빈 배열로 유지)
+// 임시 후기 데이터
 const reviewsData = [
   {
     id: 1,
@@ -31,7 +31,7 @@ function Review() {
   const navigate = useNavigate()
 
   const handleBackClick = () => {
-    navigate("/")
+    navigate(-1)
   }
 
   // 평점을 문자열로 변환하는 함수
@@ -41,7 +41,6 @@ function Review() {
 
   return (
     <div className="review-container">
-      {/* 헤더 (고정) */}
       <header className="review-header">
         <div className="review-header-content">
           <img src="/reviewicons/back.png" alt="뒤로가기" className="review-back-icon" onClick={handleBackClick} />
@@ -49,9 +48,8 @@ function Review() {
         </div>
       </header>
 
-      {/* 스크롤 가능한 컨테이너 */}
+
       <div className="review-scrollable-container">
-        {/* 태그 부분 (원래대로 유지) */}
         <div className="review-tags">
           <button className="review-tag">소통 원활성</button>
           <button className="review-tag">청결도</button>
@@ -91,4 +89,3 @@ function Review() {
 }
 
 export default Review
-

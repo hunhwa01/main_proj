@@ -10,7 +10,7 @@
 
 .dog-image {
   width: 100%;
-  padding-top: 75%; /* 4:3 aspect ratio */
+  padding-top: 100%;
   position: relative;
   margin-bottom: 8px;
   border-radius: 8px;
@@ -72,4 +72,3 @@
   opacity: 1;
   filter: invert(24%) sepia(97%) saturate(1015%) hue-rotate(118deg) brightness(35%) contrast(101%);
 }
-

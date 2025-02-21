@@ -1,32 +1,48 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import "./BottomNavigation_T.css"
+import { supabase } from "../../lib/supabaseClient"
 
 function BottomNavigation_T() {
-  const [activeItem, setActiveItem] = useState("")
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const navigate = useNavigate()
+  const location = useLocation()
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-  // ✅ 로그인 상태 확인 (토큰 키값 수정)
   useEffect(() => {
-    const token = localStorage.getItem("token")
-    console.log("로그인 토큰:", token) // 🔥 디버깅용 로그
-    setIsLoggedIn(!!token)
+    const checkSession = async () => {
+      const {
+        data: { session },
+        error,
+      } = await supabase.auth.getSession()
+
+      if (error) {
+        console.error("🚨 세션 가져오기 실패:", error.message)
+        setIsLoggedIn(false)
+        return
+      }
+
+      if (session) {
+        console.log("✅ 로그인된 사용자 정보:", session.user)
+        setIsLoggedIn(true)
+      } else {
+        setIsLoggedIn(false)
+      }
+    }
+
+    checkSession()
   }, [])
 
   const handleClick = (item) => {
-    console.log("현재 로그인 상태:", isLoggedIn) // 🔥 디버깅용 로그
+    console.log("현재 로그인 상태:", isLoggedIn)
 
     if (!isLoggedIn) {
-      console.log("로그인 필요! 인트로페이지로 이동")
+      console.log("로그인 필요! 인트로 페이지로 이동")
       navigate("/IntroPage")
       return
     }
 
-    setActiveItem(item)
-    console.log(`${item} 클릭됨`)
     switch (item) {
       case "예약하기":
         navigate("/Main_TPage")
@@ -43,35 +59,39 @@ function BottomNavigation_T() {
       case "프로필":
         navigate("/Profile_TPage")
         break
-      // 다른 항목들에 대한 라우팅도 여기에 추가할 수 있습니다.
     }
   }
 
+  const menuItems = [
+    { name: "예약하기", path: "/Main_TPage", icon: "/bottomnavigationicons/booking.png" },
+    { name: "예약내역", path: "/Reservation_TPage", icon: "/bottomnavigationicons/history.png" },
+    { name: "라이브", path: "/Live_TPage", icon: "/bottomnavigationicons/live.png" },
+    { name: "발도장", path: "/Like_TPage", icon: "/bottomnavigationicons/paw.png" },
+    { name: "프로필", path: "/Profile_TPage", icon: "/bottomnavigationicons/profile.png" },
+  ]
+
   return (
     <div className="bottom-navigation">
-      <div className={`nav-item ${activeItem === "예약하기" ? "active" : ""}`} onClick={() => handleClick("예약하기")}>
-        <img src="/bottomnavigationicons/booking.png" alt="예약하기" className="nav-icon" />
-        <span>예약하기</span>
-      </div>
-      <div className={`nav-item ${activeItem === "예약내역" ? "active" : ""}`} onClick={() => handleClick("예약내역")}>
-        <img src="/bottomnavigationicons/history.png" alt="예약내역" className="nav-icon" />
-        <span>예약내역</span>
-      </div>
-      <div className={`nav-item ${activeItem === "라이브" ? "active" : ""}`} onClick={() => handleClick("라이브")}>
-        <img src="/bottomnavigationicons/live.png" alt="라이브" className="nav-icon" />
-        <span>라이브</span>
-      </div>
-      <div className={`nav-item ${activeItem === "발도장" ? "active" : ""}`} onClick={() => handleClick("발도장")}>
-        <img src="/bottomnavigationicons/paw.png" alt="발도장" className="nav-icon" />
-        <span>발도장</span>
-      </div>
-      <div className={`nav-item ${activeItem === "프로필" ? "active" : ""}`} onClick={() => handleClick("프로필")}>
-        <img src="/bottomnavigationicons/profile.png" alt="프로필" className="nav-icon" />
-        <span>프로필</span>
-      </div>
+      {menuItems.map((item) => (
+        <div
+          key={item.name}
+          className={`nav-item ${
+            // 예약내역 메뉴의 경우 Reservation_TPage와 Last_TPage 모두에서 active 상태 유지
+            (
+              item.name === "예약내역" &&
+                (location.pathname === "/Reservation_TPage" || location.pathname === "/Last_TPage")
+            ) || location.pathname === item.path
+              ? "active"
+              : ""
+          }`}
+          onClick={() => handleClick(item.name)}
+        >
+          <img src={item.icon || "/placeholder.svg"} alt={item.name} className="nav-icon" />
+          <span>{item.name}</span>
+        </div>
+      ))}
     </div>
   )
 }
 
 export default BottomNavigation_T
-

@@ -50,4 +50,3 @@ function Reservation1() {
 }
 
 export default Reservation1
-

@@ -2,24 +2,47 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./Main.css";
 import Weather from "./weather";
+import { supabase } from "../../lib/supabaseClient";
 
 function Main() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [weatherLocation, setWeatherLocation] = useState(() => {
+    const storedWeatherLocation = localStorage.getItem('weatherLocation');
+    return storedWeatherLocation ? JSON.parse(storedWeatherLocation) : { city: '서울특별시', district: '강남구' };
+  });
 
-  // ✅ 로그인 상태 확인 (토큰 키값 수정)
+  // ✅ 로그인 상태 확인 (Supabase 세션 기반)
   useEffect(() => {
-    const token = localStorage.getItem("token"); // 🔥 "authToken"이 아니라 "token" 확인
-    console.log("로그인 토큰:", token); // 🔥 디버깅용 로그
-    setIsLoggedIn(!!token);
-  }, []);
+    const checkSession = async () => {
+      const { data: { session }, error } = await supabase.auth.getSession();
+
+      if (error) {
+        console.error("🚨 세션 가져오기 실패:", error.message);
+        setIsLoggedIn(false);
+        return;
+      }
+
+      if (session) {
+        console.log("✅ 로그인된 사용자 정보:", session.user);
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    };
+
+    checkSession();
+
+    // 날씨 정보를 로컬 스토리지에 저장
+    localStorage.setItem('weatherLocation', JSON.stringify(weatherLocation));
+  }, [weatherLocation]);
 
   // ✅ 버튼 클릭 핸들러 (로그인 체크 후 이동)
   const handleClick = (item) => {
     console.log("현재 로그인 상태:", isLoggedIn); // 🔥 디버깅용 로그
 
     if (!isLoggedIn) {
-      console.log("로그인 필요! 인트로페이지로 이동");
+      console.log("로그인 필요! 인트로 페이지로 이동");
       navigate("/IntroPage");
       return;
     }
@@ -52,7 +75,11 @@ function Main() {
 
       <main>
         <div className="main-weather-section">
-          <Weather city="Seoul" />
+          {weatherLocation.city && weatherLocation.district ? (
+            <Weather city={weatherLocation.city} district={weatherLocation.district} />
+          ) : (
+            <div>날씨 정보를 불러오는 중...</div>
+          )}
         </div>
 
         <div className="main-mbti-card clickable-card" onClick={() => handleClick("dbti")}>

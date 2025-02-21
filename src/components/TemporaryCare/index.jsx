@@ -1,6 +1,6 @@
 "use client";
 
-import { useNavigate } from "react-router-dom"; // useNavigate를 올바르게 가져옵니다.
+import { useNavigate } from "react-router-dom";
 import DogCard from "../Dog";
 import "./TemporaryCare.css";
 import { dogs } from "../../app/data";
@@ -35,7 +35,7 @@ const TemporaryCare = () => {
 
       <main className="TemporaryCare-main-content">
         <button className="TemporaryCare-matching-button"
-          onClick={() => navigate("/TemporaryCare_RePage")}
+          onClick={() => navigate("/TemporaryCare_testPage")}
           >
           당신과 찰떡인 강아지 맞춤추천
         </button>

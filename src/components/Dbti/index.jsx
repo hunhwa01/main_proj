@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import "./Dbti.css"
 
-// 각 카테고리별 질문 데이터 (각 카테고리 3문항)
+// 각 카테고리별 질문 데이터
 const questions = {
   "E/I": [
     {
@@ -98,7 +98,7 @@ const MBTITest = () => {
     navigate(-1)
   }
 
-  // 선택지 클릭 시, 해당 질문의 카테고리 정보를 기반으로 첫 번째 선택이면 첫 글자, 두 번째면 세 번째 인덱스 글자("E/I"의 경우 "E" 또는 "I")를 저장합니다.
+  // 선택지 클릭 시, 해당 질문의 카테고리 정보를 기반으로 MBTI를 저장합니다.
   const handleChoiceSelect = (choiceIndex) => {
     const currentQuestion = allQuestions[currentIndex]
     const letter =
@@ -120,7 +120,7 @@ const MBTITest = () => {
     }
   }
 
-  // GET 방식으로 답변 데이터를 쿼리 스트링에 담아 백엔드에 요청합니다.
+  // GET 방식으로 답변 데이터를 쿼리 스트링에 담아 백엔드에 요청
   const submitTest = async (allAnswers) => {
     try {
       const queryString = new URLSearchParams({

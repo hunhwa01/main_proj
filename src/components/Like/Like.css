@@ -3,7 +3,7 @@
   flex-direction: column;
   height: calc(100% - 100px); /* BottomNavigation 높이를 뺌 */
   padding-bottom: 100px; /* BottomNavigation 높이만큼 패딩 추가 */
-  background-color: #E8EAE8;
+  background-color: #DCEBDC;
   box-sizing: border-box;
   padding: 0 0 0 0;
   margin: 0;
@@ -23,7 +23,7 @@
 
 .like-header-content {
   width: 100%;
-  margin-top: 8px; /* h1, h2 위아래 위치 조정 */
+  margin-top: 8px;
 }
 
 .like-header-content h1 {
@@ -41,17 +41,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 20vh - 30px); /* 뷰포트 높이에서 헤더 높이와 여백을 뺀 값 */
+  height: calc(100vh - 20vh - 30px);
   font-size: 18px;
   color: #666;
 }
 
-/* 강아지 카드 그리드 스타일 */
 .like-dogs-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2x2 그리드 */
+  grid-template-columns: repeat(2, 1fr);
   gap: 24px;
-  padding: 20px;
+  padding: 0px 11px 0px 0px;
 }
 
 /* 스크롤바 스타일링 */

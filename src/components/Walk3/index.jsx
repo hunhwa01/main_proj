@@ -1,9 +1,7 @@
 "use client";
 
-// React와 useState 훅을 가져옵니다.
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// CSS 스타일을 가져옵니다.
 import "./Walk3.css";
 
 export default function Walk3() {
@@ -134,7 +132,6 @@ export default function Walk3() {
         </div>
       </div>
 
-      {/* Bottom Section */}
       <div className="Walk3-bottom-section">
         <div className="Walk3-bottom-content">
           <p className="Walk3-confirm-text">

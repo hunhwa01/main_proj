@@ -1,17 +1,14 @@
-/* 전체 컨테이너 */
 .profile-container {
   display: flex;
   flex-direction: column;
   height: calc(100% - 100px); /* BottomNavigation 높이를 뺌 */
   padding-bottom: 100px; /* BottomNavigation 높이만큼 패딩 추가 */
-  background-color: #E8EAE8;
+  background-color: #DCEBDC;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
-/* 헤더 */
-/* 헤더 관련 스타일 수정 */
 .profile-header {
   background-color: #fff;
   height: auto;
@@ -28,12 +25,11 @@
   justify-content: space-between;
   align-items: flex-end;
   width: 100%;
-  height: 26px; /* 유지: 기존 높이 그대로 유지 */
+  height: 26px;
   position: relative;
 }
 
 .profile-header-top > :first-child {
-  /* "더보기" 텍스트에 대한 스타일 */
   font-size: 33px;
   font-weight: bold;
   color: #333;
@@ -41,7 +37,7 @@
   padding: 0;
   line-height: 1;
   position: absolute;
-  bottom: -36px; /* 변경: 10px 아래로 이동 */
+  bottom: -36px;
 }
 
 .profile-header-top .profile-link {
@@ -52,7 +48,7 @@
   margin: 0;
   padding: 0;
   position: absolute;
-  bottom: -36px; /* 변경: 10px 아래로 이동 */
+  bottom: -36px;
   right: 0;
 }
 
@@ -137,13 +133,12 @@
   color: #333;
 }
 
-/* 트레이너 모드로 전환 (링크 스타일 적용) */
 .profile-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  text-decoration: none; /* 링크 밑줄 제거 */
-  color: inherit; /* 텍스트 색상 상속 */
+  text-decoration: none;
+  color: inherit;
   position: absolute;
   bottom: 100px;
   width: 100%;
@@ -163,5 +158,5 @@
   width: 20px;
   height: 20px;
   color: #333;
-  margin-right: 40px; /* 텍스트와의 간격 */
+  margin-right: 40px;
 }

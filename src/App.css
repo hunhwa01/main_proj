@@ -1,29 +1,27 @@
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-  }
-  
-  .app {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 100vw; /* Viewport width */
-    height: 100vh; /* Viewport height */
-    background-color: #ffffff;
-    overflow: hidden;
-  }
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff;
+  overflow: hidden;
+}
 
 
-/* 메인 콘텐츠 스타일 */
 .app-main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-    padding: 20px;
-  }
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  padding: 20px;
+}

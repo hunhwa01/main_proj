@@ -6,7 +6,6 @@ function Like() {
 
   return (
     <div className="like-container" style={{minHeight: '100%', overflowY: 'auto'}}>
-      {/* 헤더 */}
       <header className="like-header">
         <div className="like-header-content">
           <h1>발도장</h1>
@@ -27,4 +26,3 @@ function Like() {
 }
 
 export default Like
-

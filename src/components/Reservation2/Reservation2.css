@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  background-color: #E8EAE8;
+  background-color: #DCEBDC;
   box-sizing: border-box;
   margin: 0;
 }
@@ -238,4 +238,3 @@
 .reservation2-match-button-link:hover {
   text-decoration: none;
 }
-

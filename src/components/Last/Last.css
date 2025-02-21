@@ -3,7 +3,7 @@
   flex-direction: column;
   height: calc(100% - 100px);
   padding-bottom: 100px;
-  background-color: #E8EAE8;
+  background-color: #DCEBDC;
   box-sizing: border-box;
   padding: 0 0 20px 0;
   margin: 0;
@@ -231,4 +231,3 @@
 .reservation-list {
   padding: 20px 0;
 }
-

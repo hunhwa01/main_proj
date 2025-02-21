@@ -7,7 +7,7 @@ class WalkingRoute(Base):
     __tablename__ = "walking_routes"
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)  # ✅ int4 기본키 수정
-    reservation_id = Column(Integer, ForeignKey("reservations.id"), nullable=False)  # ✅ ForeignKey 수정
+    reservation_id = Column(Integer, nullable=False)  # ✅ ForeignKey 수정
     start_latitude = Column(Float, nullable=False)
     start_longitude = Column(Float, nullable=False)
     end_latitude = Column(Float, nullable=False)
@@ -21,11 +21,14 @@ class WalkReport(Base):
     __tablename__ = "reports"
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)  # ✅ int4 기본키 수정
-    walk_id = Column(Integer, ForeignKey("walking_routes.id"), nullable=False)  # ✅ ForeignKey 수정
-    user_id = Column(UUID, ForeignKey("users.user_id"), nullable=False)
-    trainer_id = Column(Integer, ForeignKey("trainers.id"), nullable=True)  # ✅ ForeignKey 수정
+    walk_id = Column(Integer, nullable=False)  # ✅ ForeignKey 수정
+    uuid_id = Column(UUID, nullable=False)
+    trainer_id = Column(Integer, nullable=True)  # ✅ ForeignKey 수정
     feedback = Column(String, nullable=True)
     created_at = Column(TIMESTAMP, server_default=func.now())
+    distance = Column(Float, nullable=False)
+    steps = Column(Integer, nullable=False)
+    time = Column(Integer, nullable=False)
 
 
 

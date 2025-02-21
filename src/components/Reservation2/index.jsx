@@ -63,4 +63,3 @@ function Reservation2() {
 }
 
 export default Reservation2
-

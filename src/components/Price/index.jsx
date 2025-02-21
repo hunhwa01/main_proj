@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import "./Price.css"
 
+// 임시데이터
 const priceData = {
   30: {
     small: 18000,
@@ -28,7 +29,6 @@ export default function Price() {
 
   return (
     <div className="Price-container">
-      {/* 헤더 섹션 */}
       <div className="Price-header">
         <button className="Price-back-button" onClick={() => navigate("/WalkPage")}>
           <img src="/icons/back.png" alt="뒤로가기" className="Price-back-button-image" />
@@ -36,7 +36,6 @@ export default function Price() {
         <h1 className="Price-title">이용 요금</h1>
       </div>
 
-      {/* 시간 선택 버튼 */}
       <div className="Price-duration-buttons">
         {Object.keys(priceData).map((duration) => (
           <button
@@ -49,7 +48,6 @@ export default function Price() {
         ))}
       </div>
 
-      {/* 가격 정보 섹션 */}
       <div className="Price-info-section">
         <h2 className="Price-info-title">{priceData[selectedDuration].title}</h2>
 
@@ -109,4 +107,3 @@ export default function Price() {
     </div>
   )
 }
-

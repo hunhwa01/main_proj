@@ -11,7 +11,7 @@ const walkOptions = [
 ];
 
 export default function Walk() {
-  const [selectedDuration, setSelectedDuration] = useState(30); // ✅ 기본값 30분 선택
+  const [selectedDuration, setSelectedDuration] = useState(30);
   const [wantToday, setWantToday] = useState(false);
   const navigate = useNavigate();
 

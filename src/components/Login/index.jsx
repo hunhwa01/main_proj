@@ -1,37 +1,50 @@
 import "./Login.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "../../lib/supabaseClient";  // ✅ Supabase 추가
 
-function Login() {
-  const navigate = useNavigate();
+export default function Login() {
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleLogin = async (event) => {
-    event.preventDefault(); // 기본 폼 제출 방지
-
-    try {
-      const response = await fetch("http://127.0.0.1:8000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_id: userId, password: password }),
-      });
-
-      if (!response.ok) {
-        throw new Error("로그인 실패! 아이디 또는 비밀번호를 확인해주세요.");
-      }
-
-      const data = await response.json();
-
-      // ✅ 로그인 성공 시, user_id 및 token 저장
-      localStorage.setItem("user_id", data.user_id);
-      localStorage.setItem("token", data.token);
-
-      alert("로그인 성공!");
-      navigate("/"); // 로그인 후 메인 페이지로 이동
-    } catch (error) {
-      alert(error.message);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+  
+    // 1️⃣ `user_id`로 이메일 찾기
+    const { data: users, error: userError } = await supabase
+      .from("users")  // ✅ Supabase `users` 테이블에서 검색
+      .select("email")
+      .eq("user_id", userId)
+      .single();
+  
+    if (userError || !users) {
+      console.error("🚨 아이디를 찾을 수 없습니다.");
+      alert("아이디가 존재하지 않습니다.");
+      return;
     }
+  
+    const email = users.email;
+  
+    // 2️⃣ Supabase 로그인 실행
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,  // ✅ 찾은 이메일을 사용하여 로그인
+      password: password,
+    });
+  
+    if (error) {
+      console.error("🚨 로그인 실패:", error.message);
+      alert("로그인 실패: " + error.message);
+      return;
+    }
+  
+    console.log("✅ 로그인 성공! 세션:", data.session);
+  
+    // 3️⃣ JWT 저장 (Supabase에서 발급된 토큰 저장)
+    localStorage.setItem("supabaseToken", data.session.access_token);
+  
+    alert("로그인 성공!");
+    navigate("/");
   };
 
   return (
@@ -87,5 +100,3 @@ function Login() {
     </div>
   );
 }
-
-export default Login;

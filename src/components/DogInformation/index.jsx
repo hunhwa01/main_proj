@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom"
 import "./DogInformation.css"
 
 export default function DogInformation() {
-  // useLocation을 통해 이전 페이지에서 전달된 mbti 값을 가져옵니다.
+  // 이전 페이지에서 전달된 mbti 값을 가져옵니다.
   const location = useLocation()
   const mbtiFromTest = location.state?.mbti || "" // 값이 없으면 빈 문자열
 
@@ -34,7 +34,6 @@ export default function DogInformation() {
     setWeight(parts.join("."))
   }
 
-  // 아래의 isValidYear, isValidMonth, isValidDay 등은 기존 코드와 동일합니다.
   const isValidYear = (year) => {
     const currentYear = new Date().getFullYear()
     return year >= 1900 && year <= currentYear

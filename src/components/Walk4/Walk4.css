@@ -12,7 +12,7 @@ html {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  background-color: #e8eae8;
+  background-color: #DCEBDC;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   position: absolute;
@@ -40,13 +40,11 @@ html {
   background: #555;
 }
 
-/* Header Section */
 .Walk4-header {
   padding: 20px;
   background-color: white;
 }
 
-/* 뒤로가기 버튼 */
 .Walk4-back-button {
   padding: 8px;
   background: none;
@@ -55,7 +53,6 @@ html {
   cursor: pointer;
 }
 
-/* 제목 */
 .Walk4-title {
   font-size: 24px;
   font-weight: 500;
@@ -63,17 +60,15 @@ html {
   line-height: 1.4;
 }
 
-/* Bottom Section (높이 살짝 줄임) */
 .Walk4-bottom-section {
   margin-top: auto;
-  padding: 16px; /* 기존 padding 유지 */
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 20px; /* 버튼과 텍스트 사이 간격 조정 */
+  gap: 20px;
   background-color: white;
 }
 
-/* 다음으로 버튼 */
 .Walk4-next-button {
   background-color: #006400;
   color: white;
@@ -83,7 +78,7 @@ html {
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  margin: 10px 0; /* 🔹 버튼 위아래 여백 살짝 줄임 */
+  margin: 10px 0;
 }
 
 .Walk4-next-button:hover {

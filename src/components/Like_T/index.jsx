@@ -6,7 +6,6 @@ function Like_T() {
 
   return (
     <div className="like-t-container" style={{minHeight: '100%', overflowY: 'auto'}}>
-      {/* 헤더 */}
       <header className="like-t-header">
         <div className="like-t-header-content">
           <h1>발도장</h1>
@@ -27,4 +26,3 @@ function Like_T() {
 }
 
 export default Like_T
-

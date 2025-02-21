@@ -12,7 +12,7 @@ html {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  background-color: #e8eae8;
+  background-color: #DCEBDC;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   position: absolute;
@@ -40,7 +40,6 @@ html {
   background: #555;
 }
 
-/* Header Section */
 .Walk3-header {
   padding: 20px;
   background-color: white;
@@ -61,7 +60,6 @@ html {
   line-height: 1.4;
 }
 
-/* Calendar Section */
 .Walk3-calendar-wrapper {
   flex-grow: 1;
   display: flex;
@@ -80,7 +78,6 @@ html {
   padding: 20px;
 }
 
-/* Month Selector */
 .Walk3-month-selector {
   display: flex;
   align-items: center;
@@ -103,12 +100,10 @@ html {
   font-weight: 500;
 }
 
-/* Calendar */
 .Walk3-calendar {
   width: 100%;
 }
 
-/* Weekdays */
 .Walk3-weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -122,7 +117,6 @@ html {
   padding: 8px 0;
 }
 
-/* Dates Grid */
 .Walk3-dates {
   display: flex;
   flex-direction: column;
@@ -135,7 +129,6 @@ html {
   gap: 8px;
 }
 
-/* Date Buttons */
 .Walk3-date {
   aspect-ratio: 1;
   display: flex;
@@ -154,19 +147,16 @@ html {
   background-color: rgba(7, 89, 21, 0.1);
 }
 
-/* Past Date */
 .Walk3-date.Walk3-past {
   color: #dadada;
   cursor: not-allowed;
 }
 
-/* Selected Date */
 .Walk3-date.Walk3-selected {
   background-color: #075915;
   color: white;
 }
 
-/* Today's Date */
 .Walk3-date.Walk3-today {
   border: 2px solid #075915;
   font-weight: bold;

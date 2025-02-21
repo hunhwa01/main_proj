@@ -12,7 +12,7 @@ html {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  background-color: #e8eae8;
+  background-color: #DCEBDC;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   position: absolute;
@@ -93,7 +93,7 @@ html {
 .Walk2-qa-section {
   margin-top: 12px;
   padding: 20px;
-  background-color: #e8eae8;
+  background-color: #DCEBDC;
 }
 
 .Walk2-qa-title {
@@ -118,8 +118,8 @@ html {
 }
 
 .Walk2-input-error {
-  background-color: #fff3e0;
-  color: #e65100;
+  background-color: #ffebee;
+  color: #d32f2f;
 }
 
 .Walk2-bottom-section {
@@ -161,7 +161,6 @@ html {
   }
 }
 
-/* Google Places Autocomplete 스타일 오버라이드 */
 .css-13cymwt-control {
   border-color: #ccc !important;
   box-shadow: none !important;
@@ -177,17 +176,14 @@ html {
   box-shadow: 0 0 0 1px #075915 !important;
 }
 
-/* 옵션에 마우스를 올렸을 때의 스타일 */
 .css-1n6sfyn-MenuList > div:hover {
   background-color: rgba(7, 89, 21, 0.1) !important;
 }
 
-/* 선택된 옵션의 스타일 */
 .css-1n6sfyn-MenuList > div[aria-selected="true"] {
   background-color: rgba(7, 89, 21, 0.2) !important;
 }
 
-/* 입력 필드 placeholder 스타일 */
 .css-13cymwt-control .css-1wa3eu0-placeholder {
   color: #757575;
 }

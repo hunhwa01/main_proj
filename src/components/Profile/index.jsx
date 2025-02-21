@@ -4,7 +4,6 @@ import './Profile.css';
 function Profile() {
   return (
     <div className="profile-container" style={{minHeight: '100%', overflowY: 'auto'}}>
-      {/* 헤더 */}
       <header className="profile-header">
         <div className="profile-header-top">
           <h1>더보기</h1>
@@ -23,14 +22,12 @@ function Profile() {
         </div>
       </header>
 
-      {/* 리포트 */}
       <a href="/ResultLastPage" className="profile-report">
         <div className="profile-report-card">
           <img src="/profileicons/report.png" alt="리포트 아이콘" />
           <span>지난 산책 리포트</span>
         </div>
       </a>
-      {/* 트레이너 모드로 전환 */}
       <a href="/Main_TPage" className="profile-footer">
         <span className="profile-trainer-mode-text">트레이너 모드로 전환</span>
         <img

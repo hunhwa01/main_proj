@@ -11,10 +11,9 @@ function Last() {
   const [reservations, setReservations] = useState({})
   const navigate = useNavigate()
 
-  // 예약 데이터를 가져오는 함수
   const fetchReservations = () => {
-    // 예시 데이터
     return {
+      // 예시 데이터
       2024: [
         {
           id: 1,
@@ -61,14 +60,12 @@ function Last() {
   }
 
   const handleMeetAgainClick = (reservationId) => {
-    // 여기에 다시만나기 로직 추가
     console.log(`다시만나기 클릭: ${reservationId}`)
   }
 
   const renderReservationCards = () => {
     const yearReservations = reservations[selectedYear] || []
     if (yearReservations.length > 0) {
-      // 날짜를 기준으로 내림차순 정렬
       const sortedReservations = [...yearReservations].sort((a, b) => new Date(b.date) - new Date(a.date))
       return (
         <div className="reservation-list">
@@ -156,4 +153,3 @@ function Last() {
 }
 
 export default Last
-

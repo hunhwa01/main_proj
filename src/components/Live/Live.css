@@ -3,7 +3,7 @@
   flex-direction: column;
   height: calc(100% - 100px); /* BottomNavigation 높이를 뺌 */
   padding-bottom: 100px; /* BottomNavigation 높이만큼 패딩 추가 */
-  background-color: #E8EAE8;
+  background-color: #DCEBDC;
   box-sizing: border-box;
   padding: 0 0 20px 0; /* 하단에 20px 패딩 추가 */
   margin: 0;
@@ -99,12 +99,98 @@
   z-index: 10;
 }
 
-/* 채팅 메시지 스타일 */
-.live-chat-message {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 20vh - 30px); /* 뷰포트 높이에서 헤더 높이와 여백을 뺀 값 */
-  font-size: 18px;
-  color: #666;
-}
+
+
+  /* 채팅 전체 컨테이너 */
+  .live-chat-container {
+    display: flex;
+    padding-bottom: 60px;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden; /* ✅ 채팅 박스만 스크롤되도록 설정 */
+  }
+  
+  /* 채팅 메시지 박스 (스크롤 가능) */
+  .live-chat-box {
+    flex-grow: 1; /* ✅ 높이를 자동으로 조절 */
+    height: 100%; /* ✅ 부모 요소 크기에 맞게 확장 */
+    padding: 20px;
+    overflow-y: auto; /* ✅ 스크롤 가능하게 설정 */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .live-chat-message {
+    max-width: 60%;
+    padding: 12px;
+    border-radius: 120px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+  }
+  
+  .live-chat-message.user {
+    background-color: #075915;
+    color: white;
+    align-self: flex-end;
+    border-radius: 15px 15px 1px 15px;
+  }
+  
+  .live-chat-message.trainer {
+    background-color: white;
+    color: black;
+    align-self: flex-start;
+    border-radius: 15px 15px 15px 1px;
+  }
+  
+  /* 입력창을 하단 고정 */
+  .live-chat-input-wrapper {
+    position: absolute; /* fixed에서 absolute로 변경 */
+    bottom: 100px; /* 하단바 높이만큼 띄우기 */
+    width: 100%; /* 전체 너비로 변경 */
+    display: flex;
+    background: #DCEBDC;
+    padding: 10px 0;
+    z-index: 1000;
+    left: 0; /* left 값 제거하여 부모 기준으로 정렬 */
+  }
+  
+  
+  /* ✅ 입력창 크기 조정 및 중앙 정렬 */
+  .live-chat-input-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 89%;
+    max-width: 400px;
+    padding: 9px;
+    background: #ffffff;
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    margin: 0 auto;
+  }
+  
+  /* 입력 필드 */
+  .live-chat-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    font-size: 14px;
+    background: transparent;
+  }
+  
+  /* 보내기 버튼 */
+  .live-chat-send-button {
+    background-color: #075915;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .live-chat-send-button:hover {
+    background-color: #064a12;
+  }

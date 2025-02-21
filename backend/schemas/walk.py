@@ -1,9 +1,10 @@
 from pydantic import BaseModel
 from uuid import UUID
 from datetime import datetime
+from typing import Optional
 
 class WalkingRouteCreate(BaseModel):
-    reservation_id: UUID
+    reservation_id: int
     start_latitude: float
     start_longitude: float
     end_latitude: float
@@ -13,7 +14,10 @@ class WalkingRouteCreate(BaseModel):
     estimated_time: int
 
 class WalkReportCreate(BaseModel):
-    walk_id: UUID
-    user_id: UUID
-    trainer_id: UUID | None
-    feedback: str | None
+    walk_id: int
+    uuid_id: UUID
+    trainer_id: int
+    feedback: Optional[str] = None
+    distance: float
+    steps: int
+    time: int

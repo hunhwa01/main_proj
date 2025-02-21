@@ -1,0 +1,62 @@
+.walkend-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .walkend-popup {
+    background: white;
+    width: 80%;
+    max-width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .walkend-popup-message {
+    font-size: 16px;
+    font-weight: bold;
+    color: #006400;
+    margin-bottom: 20px;
+  }
+
+  .walkend-popup-buttons {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+  }
+
+  .walkend-popup-button {
+    background-color: white;
+    color: #006400;
+    border: 2px solid #006400;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .walkend-popup-button.cancel {
+    border-color: #333;
+    color: #333;
+  }
+
+  .walkend-popup-button:hover {
+    background-color: #006400;
+    color: white;
+  }
+  
+  .walkend-popup-button.cancel:hover {
+    background-color: #333;
+    color: white;
+  }
+  

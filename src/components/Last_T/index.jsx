@@ -11,9 +11,7 @@ function Last_T() {
   const [reservations, setReservations] = useState({})
   const navigate = useNavigate()
 
-  // 예약 데이터를 가져오는 함수
   const fetchReservations = () => {
-    // 예시 데이터
     return {
       2024: [
         {
@@ -57,32 +55,30 @@ function Last_T() {
   }
 
   const handleMeetAgainClick = (reservationId) => {
-    // 여기에 다시만나기 로직 추가
     console.log(`다시만나기 클릭: ${reservationId}`)
   }
 
   const renderReservationCards = () => {
     const yearReservations = reservations[selectedYear] || []
     if (yearReservations.length > 0) {
-      // 날짜를 기준으로 내림차순 정렬
       const sortedReservations = [...yearReservations].sort((a, b) => new Date(b.date) - new Date(a.date))
       return (
-        <div className="reservation-list">
+        <div className="last-t-reservation-list">
           {sortedReservations.map((reservation) => (
-            <div key={reservation.id} className="reservation-card">
-              <div className="reservation-time">{reservation.date}</div>
-              <div className="trainer-info">
-                <div className="trainer-profile">
-                  <div className="trainer-avatar">
+            <div key={reservation.id} className="last-t-reservation-card">
+              <div className="last-t-reservation-time">{reservation.date}</div>
+              <div className="last-t-trainer-info">
+                <div className="last-t-trainer-profile">
+                  <div className="last-t-trainer-avatar">
                     <img
                       src={`/dogprofile/${reservation.dog.replace("강아지", "")}.jpg`}
                       alt={`${reservation.dog} profile`}
                     />
                   </div>
-                  <div className="trainer-name">{reservation.dog}님</div>
+                  <div className="last-t-trainer-name">{reservation.dog}님</div>
                 </div>
                 <button
-                  className="action-button meet-again-button"
+                  className="last-t-action-button last-t-meet-again-button"
                   onClick={() => handleMeetAgainClick(reservation.id)}
                 >
                   다시만나기
@@ -94,7 +90,7 @@ function Last_T() {
       )
     } else {
       return (
-        <div className="last-chat-message">
+        <div className="last-t-chat-message">
           <div>
             {selectedYear}년의 예약이 없어요
             <br />
@@ -107,33 +103,33 @@ function Last_T() {
   }
 
   return (
-    <div className="last-container" style={{ minHeight: "100%", overflowY: "auto" }}>
-      <header className="last-header">
-        <div className="last-header-content">
+    <div className="last-t-container" style={{ minHeight: "100%", overflowY: "auto" }}>
+      <header className="last-t-header">
+        <div className="last-t-header-content">
           <h1>예약내역</h1>
-          <div className="last-header-buttons">
+          <div className="last-t-header-buttons">
             <Link
               to="/Reservation_TPage"
-              className="last-header-button"
+              className="last-t-header-button"
               style={{ background: "none", border: "none", textDecoration: "none" }}
             >
               진행 예약
             </Link>
-            <button className="last-header-button active" style={{ background: "none", border: "none" }}>
+            <button className="last-t-header-button active" style={{ background: "none", border: "none" }}>
               지난 예약
             </button>
           </div>
         </div>
       </header>
       <div style={{ position: "relative" }}>
-        <button className="last-year-button" onClick={() => setShowYears(!showYears)}>
-          <img src="/lasticons/calendar.png" alt="Calendar" className="last-year-button-icon" />
+        <button className="last-t-year-button" onClick={() => setShowYears(!showYears)}>
+          <img src="/lasticons/calendar.png" alt="Calendar" className="last-t-year-button-icon" />
           {selectedYear}년 예약
         </button>
         {showYears && (
-          <div className="year-dropdown">
+          <div className="last-t-year-dropdown">
             {years.map((year) => (
-              <div key={year} className="year-option" onClick={() => handleYearClick(year)}>
+              <div key={year} className="last-t-year-option" onClick={() => handleYearClick(year)}>
                 {year}년
               </div>
             ))}

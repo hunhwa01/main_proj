@@ -44,14 +44,14 @@
 
 /* 마우스를 올렸을 때 텍스트 색상 변경 (클릭된 항목 제외) */
 .nav-item:hover:not(.active) {
-  color: #075915;
-  background-color: #fff;
+  color: #00540E;
+  background-color: #f4f4f4;
 }
 
 /* 클릭된 항목 (active 상태) */
 .nav-item.active {
-  color: #075915; /* 텍스트를 초록색으로 변경 */
-  background-color: transparent; /* 배경색 투명 */
+  color: #00540E; /* ✅ 선택된 항목의 텍스트를 초록색으로 유지 */
+  background-color: transparent;
 }
 
 .nav-item.active .nav-icon {

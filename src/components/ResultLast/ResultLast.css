@@ -1,15 +1,13 @@
-/* 전체 컨테이너 */
 .resultlast-container {
   display: flex;
   flex-direction: column;
   height: 80%;
-  background-color: #E8EAE8;
+  background-color: #DCEBDC;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
-/* 고정된 헤더 */
 .resultlast-header {
   background-color: #fff;
   height: auto;
@@ -25,7 +23,6 @@
   z-index: 100;
 }
 
-/* 헤더 내부 콘텐츠 */
 .resultlast-header-content {
   display: flex;
   flex-direction: column;
@@ -33,7 +30,6 @@
   gap: 10px;
 }
 
-/* 뒤로가기 아이콘 */
 .resultlast-back-icon {
   width: 24px;
   height: auto;
@@ -41,7 +37,6 @@
   margin: 10px 0 0 0;
 }
 
-/* 제목 스타일 */
 .resultlast-header-content h1 {
   font-size: 33px;
   font-weight: bold;
@@ -49,15 +44,14 @@
   margin: 10px 0 0 0;
 }
 
-/* 스크롤 가능한 산책 리포트 카드 컨테이너 */
+
 .resultlast-scrollable-container {
   flex-grow: 1;
   overflow-y: auto;
-  height: calc(100vh - 13vh); /* 헤더를 제외한 높이 */
+  height: calc(100vh - 13vh);
   padding-bottom: 10px;
 }
 
-/* 산책 리포트 카드 스타일 */
 .resultlast-walk-report-card {
   background-color: #fff;
   margin: 20px;
@@ -66,7 +60,6 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* 날짜 및 제목 스타일 */
 .resultlast-report-date {
   font-size: 18px;
   color: #333;
@@ -82,7 +75,6 @@
   margin-bottom: 24px;
 }
 
-/* 프로필 섹션 */
 .resultlast-profile-section {
   display: flex;
   justify-content: center;
@@ -102,7 +94,7 @@
 
 .resultlast-dog-photo,
 .resultlast-user-photo {
-  width: 100px; /* 원하는 크기로 조정 */
+  width: 100px;
   height: 100px;
   border-radius: 50%; /* 원형 모양 */
   overflow: hidden; /* 원 밖으로 넘치는 부분 숨기기 */
@@ -118,7 +110,7 @@
   object-fit: cover; /* 이미지가 원형 안에 꽉 차도록 */
 }
 
-/* 발자국 아이콘 */
+
 .resultlast-paw-prints {
   display: flex;
   gap: 8px;
@@ -129,7 +121,7 @@
   height: 55px;
 }
 
-/* 산책 리포트 상세 정보 */
+
 .resultlast-walk-details {
   display: flex;
   flex-direction: column;
@@ -156,7 +148,6 @@
   margin: 0;
 }
 
-/* 특이사항 입력 박스 */
 .resultlast-notes-box {
   border: 1px solid #ccc;
   border-radius: 8px;

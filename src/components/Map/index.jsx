@@ -3,17 +3,39 @@ import axios from "axios";
 
 const TMAP_API_KEY = process.env.REACT_APP_TMAP_API_KEY;
 
-const Map = () => {
+const Map = ({ userId }) => {
   const mapRef = useRef(null);
   const [map, setMap] = useState(null);
   const [distance, setDistance] = useState(null);
   const [steps, setSteps] = useState(null);
   const [time, setTime] = useState(null);
   const [polyline, setPolyline] = useState(null);
+  const [reservationId, setReservationId] = useState(null);
 
   useEffect(() => {
+    fetchReservationId(userId)
     fetchAddresses();
-  }, []);
+  }, [userId]);
+
+  // ✅ `user_id` 기반으로 `reservation_id` 조회
+  const fetchReservationId = async (userId) => {
+    try {
+      if (!userId) {
+        console.error("🚨 로그인된 사용자 ID가 없습니다.");
+        return;
+      }
+
+      const response = await axios.get(`http://localhost:8000/api/reservations/latest?user_id=${userId}`);
+      if (response.data && response.data.id) {
+        setReservationId(response.data.id);
+        console.log("✅ 가져온 예약 ID:", response.data.id);
+      } else {
+        console.error("🚨 현재 사용자에 대한 예약 데이터를 찾을 수 없습니다.");
+      }
+    } catch (error) {
+      console.error("🚨 예약 데이터를 불러오는 데 실패했습니다:", error);
+    }
+  };
 
   const fetchAddresses = async () => {
     try {
@@ -80,8 +102,6 @@ const Map = () => {
 
       const resultData = response.data.features;
       console.log("🚶 Tmap API 응답 데이터:", resultData);
-
-      if (!resultData || resultData.length === 0) return;
 
       let totalDistance = 0;
       let totalTime = 0;

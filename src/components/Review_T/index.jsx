@@ -12,6 +12,7 @@ function Review_T() {
   const navigate = useNavigate()
 
   const fetchReservations = () => {
+    // 임시데이터
     return {
       2024: [
         {
@@ -61,7 +62,7 @@ function Review_T() {
   }
 
   const handleBackClick = () => {
-    navigate("/Profile_TPage");
+    navigate(-1);
   };
 
   const renderReservationCards = () => {
