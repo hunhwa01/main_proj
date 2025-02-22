@@ -17,6 +17,7 @@ class WalkingRoute(Base):
     estimated_time = Column(Integer, nullable=True)
     created_at = Column(TIMESTAMP, server_default=func.now())
     uuid_id = Column(UUID, nullable=False)
+    feedback = Column(String, nullable=True)
 
 class WalkReport(Base):
     __tablename__ = "reports"

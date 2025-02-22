@@ -4,6 +4,7 @@ from datetime import datetime
 from typing import Optional
 
 class WalkingRouteCreate(BaseModel):
+    uuid_id: UUID
     reservation_id: int
     start_latitude: float
     start_longitude: float
@@ -12,6 +13,7 @@ class WalkingRouteCreate(BaseModel):
     distance_km: float
     estimated_steps: int
     estimated_time: int
+    feedback: str | None = None
 
 class WalkReportCreate(BaseModel):
     walk_id: int

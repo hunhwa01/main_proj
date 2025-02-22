@@ -48,7 +48,7 @@ async def calculate_walking_distance(start, end):
         print("🚨 거리 계산 실패:", e)
         return None
 
-async def save_walking_route(uuid_id: UUID, start_lat: float, start_lng: float, end_lat: float, end_lng: float, distance_km: float, steps: int, time: int, db: AsyncSession = Depends(get_db)):
+async def save_walking_route(uuid_id: UUID, start_lat: float, start_lng: float, end_lat: float, end_lng: float, distance_km: float, steps: int, time: int, feedback: str, db: AsyncSession = Depends(get_db)):
     # ✅ 최신 예약 ID 가져오기
     latest_reservation = await get_latest_reservation(uuid_id, db)
     if "id" not in latest_reservation:
@@ -56,7 +56,7 @@ async def save_walking_route(uuid_id: UUID, start_lat: float, start_lng: float, 
 
     # ✅ `walking_routes` 테이블에 데이터 저장
     new_route = WalkingRoute(
-        id=uuid.uuid4(),
+        uuid_id=uuid.uuid4(),
         reservation_id=int,
         start_latitude=start_lat,
         start_longitude=start_lng,
@@ -64,7 +64,8 @@ async def save_walking_route(uuid_id: UUID, start_lat: float, start_lng: float, 
         end_longitude=end_lng,
         distance_km=distance_km,
         estimated_steps=steps,
-        estimated_time=time
+        estimated_time=time,
+        feedback=feedback
     )
     db.add(new_route)
     await db.commit()

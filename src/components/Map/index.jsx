@@ -35,7 +35,7 @@ const Map = ({ onDataReady }) => {
   useEffect(() => {
     console.log("가져온 uuidId:", uuidId)
     if (uuidId) {
-      const fetchData = async() => {
+      const fetchData = async () => {
         await fetchReservationId(uuidId).then(()=> fetchAddresses());
       };
       fetchData();
@@ -155,13 +155,21 @@ const Map = ({ onDataReady }) => {
       // ✅ 부모 컴포넌트로 데이터 전달
       onDataReady({ 
         uuidId,
-        reservationId,
         distance: distanceKm, 
         steps: estimatedSteps, 
         time: estimatedTime,
         startLocation: start,
         endLocation: end,
        
+      });
+
+      console.log("📡 Map에서 보내는 데이터:", {
+        uuidId,
+        distance: distanceKm,
+        steps: estimatedSteps,
+        time: estimatedTime,
+        startLocation: start,
+        endLocation: end,
       });
 
     } catch (error) {
