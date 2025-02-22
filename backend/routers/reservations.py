@@ -28,10 +28,10 @@ async def create_reservation(reservation: ReservationCreate, db: AsyncSession = 
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/latest")
-async def get_latest_reservation(user_id: str, db: AsyncSession = Depends(get_db)):
+async def get_latest_reservation(uuid_id: str, db: AsyncSession = Depends(get_db)):
     result = await db.execute(
         select(Reservation)
-        .where(Reservation.user_id == user_id)
+        .where(Reservation.uuid_id == uuid_id)
         .order_by(Reservation.schedule.desc())  # ✅ 최신 예약을 가져옴
         .limit(1)
     )

@@ -1,14 +1,73 @@
-import React, { useState } from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { supabase } from "../../lib/supabaseClient";
+import Map from "../Map";
 import "./LiveResert_T.css";
 
-function LiveResert_T() {
+export default function LiveResert_T({}) {
   const [activeTab, setActiveTab] = useState("walk");
   const [notes, setNotes] = useState(""); // ✅ 특이사항 입력 상태 추가
+  const [walkData, setWalkData] = useState({
+    uuidId: null,
+    reservationId: null,
+    distance: 0,
+    steps: 0,
+    time: 0,
+    startLocation: null,
+    endLocation: null,
+  }); // ✅ Map에서 받아온 거리, 걸음 수, 시간 저장
 
-  // ✅ 저장 버튼 클릭 시 실행될 함수
-  const handleSaveNotes = () => {
-    console.log("특이사항 저장:", notes);
-    alert("특이사항이 저장되었습니다!"); // ✅ 저장 완료 알림
+  // ✅ Map에서 받은 데이터 저장
+  const handleRouteData = (data) => {
+    console.log("📥 Map에서 받은 데이터:", data);
+    setWalkData({
+      uuidId: data.uuidId,
+      reservationId: data.reservationId,
+      distance: data.distance,
+      steps: data.steps,
+      time: data.time,
+      startLocation: data.startLocation,
+      endLocation: data.endLocation,
+    });
+  };
+
+  // ✅ 저장 버튼 클릭 시 산책 데이터 저장
+  const saveWalkingRoute = async () => {
+    try {
+      if (!walkData.reservationId || !walkData.startLocation || !walkData.endLocation) {
+        console.error("🚨 예약 ID 또는 경로 데이터가 없습니다. 데이터를 저장할 수 없습니다.");
+        return;
+      }
+
+      const requestData = {
+        uuid_id: walkData.uuidId,
+        reservation_id: walkData.reservationId,
+        start_latitude: walkData.startLocation.latitude,
+        start_longitude: walkData.startLocation.longitude,
+        end_latitude: walkData.endLocation.latitude,
+        end_longitude: walkData.endLocation.longitude,
+        distance_km: walkData.distance,
+        estimated_steps: walkData.steps,
+        estimated_time: walkData.time,
+        notes: notes,
+      };
+
+      console.log("📤 저장할 산책 데이터:", requestData);
+
+      const response = await axios.post(
+        "http://localhost:8000/api/walk/save-walking-route",
+        requestData
+      );
+
+      if (response.status === 200) {
+        console.log("✅ 산책 경로 데이터 저장 완료:", response.data);
+        alert("산책 데이터가 성공적으로 저장되었습니다!");
+      }
+    } catch (error) {
+      console.error("🚨 산책 데이터를 저장하는 데 실패했습니다:", error);
+    }
   };
 
   return (
@@ -36,8 +95,9 @@ function LiveResert_T() {
       {/* 산책 경로 탭 */}
       {activeTab === "walk" && (
         <div className="LiveResert_T-container">
+          <Map onDataReady={handleRouteData} />
           <div className="LiveResert_T-walk-report-card">
-            <div className="LiveResert_T-report-date">0000년 00월 00일</div>
+            <div className="LiveResert_T-report-date">{new Date().toLocaleDateString()}</div>
             <div className="LiveResert_T-report-title">○○이 산책 리포트</div>
 
             <div className="LiveResert_T-profile-section">
@@ -59,12 +119,12 @@ function LiveResert_T() {
             <div className="LiveResert_T-walk-details">
               <div className="LiveResert_T-detail-item">
                 <h3>걸음수</h3>
-                <p>00</p>
+                <p>{walkData.steps} 걸음</p>
               </div>
 
               <div className="LiveResert_T-detail-item">
                 <h3>시간</h3>
-                <p>00시00분 ~ 00시00분</p>
+                <p>{walkData.time} 분</p>
               </div>
 
               <div className="LiveResert_T-detail-item">
@@ -79,7 +139,7 @@ function LiveResert_T() {
             </div>
 
             {/* ✅ 저장 버튼 추가 */}
-            <button className="LiveResert_T-save-button" onClick={handleSaveNotes}>
+            <button className="LiveResert_T-save-button" onClick={saveWalkingRoute}>
               저장
             </button>
           </div>
@@ -91,5 +151,3 @@ function LiveResert_T() {
     </div>
   );
 }
-
-export default LiveResert_T;

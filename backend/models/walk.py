@@ -16,6 +16,7 @@ class WalkingRoute(Base):
     estimated_steps = Column(Integer, nullable=True)
     estimated_time = Column(Integer, nullable=True)
     created_at = Column(TIMESTAMP, server_default=func.now())
+    uuid_id = Column(UUID, nullable=False)
 
 class WalkReport(Base):
     __tablename__ = "reports"
@@ -26,9 +27,9 @@ class WalkReport(Base):
     trainer_id = Column(Integer, nullable=True)  # ✅ ForeignKey 수정
     feedback = Column(String, nullable=True)
     created_at = Column(TIMESTAMP, server_default=func.now())
-    distance = Column(Float, nullable=False)
-    steps = Column(Integer, nullable=False)
-    time = Column(Integer, nullable=False)
+    distance = Column(Float, ForeignKey("walking_routes.distance_km"), nullable=False)
+    steps = Column(Integer, ForeignKey("walking_routes.estimated_steps"), nullable=False)
+    time = Column(Integer, ForeignKey("walking_routes.estimated_time"), nullable=False)
 
 
 

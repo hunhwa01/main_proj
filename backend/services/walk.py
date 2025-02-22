@@ -51,7 +51,7 @@ async def calculate_walking_distance(start, end):
 async def save_walking_route(uuid_id: UUID, start_lat: float, start_lng: float, end_lat: float, end_lng: float, distance_km: float, steps: int, time: int, db: AsyncSession = Depends(get_db)):
     # ✅ 최신 예약 ID 가져오기
     latest_reservation = await get_latest_reservation(uuid_id, db)
-    if not latest_reservation:
+    if "id" not in latest_reservation:
         raise HTTPException(status_code=404, detail="예약 정보가 없습니다.")
 
     # ✅ `walking_routes` 테이블에 데이터 저장

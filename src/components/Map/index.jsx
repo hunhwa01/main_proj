@@ -1,33 +1,63 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import { supabase } from "../../lib/supabaseClient";
 
 const TMAP_API_KEY = process.env.REACT_APP_TMAP_API_KEY;
 
-const Map = ({ userId }) => {
+const Map = ({ onDataReady }) => {
   const mapRef = useRef(null);
+  const reservationIdRef = useRef(null);
   const [map, setMap] = useState(null);
   const [distance, setDistance] = useState(null);
   const [steps, setSteps] = useState(null);
   const [time, setTime] = useState(null);
   const [polyline, setPolyline] = useState(null);
+  const [uuidId, setUuidId] = useState(null);  // ✅ uuidId 상태 추가
   const [reservationId, setReservationId] = useState(null);
 
   useEffect(() => {
-    fetchReservationId(userId)
-    fetchAddresses();
-  }, [userId]);
+    const fetchUserUUID = async () => {
+      const { data: { session }, error } = await supabase.auth.getSession();
 
-  // ✅ `user_id` 기반으로 `reservation_id` 조회
-  const fetchReservationId = async (userId) => {
-    try {
-      if (!userId) {
-        console.error("🚨 로그인된 사용자 ID가 없습니다.");
+      if (error || !session) {
+        console.error("🚨 UUID 가져오기 실패:", error);
         return;
       }
 
-      const response = await axios.get(`http://localhost:8000/api/reservations/latest?user_id=${userId}`);
+      console.log("✅ Supabase에서 가져온 uuid_id:", session.user.id);
+      setUuidId(session.user.id);
+    };
+
+    fetchUserUUID();
+  }, []);
+
+  // ✅ `uuid_id`가 설정된 후 데이터 가져오기
+  useEffect(() => {
+    console.log("가져온 uuidId:", uuidId)
+    if (uuidId) {
+      const fetchData = async() => {
+        await fetchReservationId(uuidId).then(()=> fetchAddresses());
+      };
+      fetchData();
+    }
+  }, [uuidId]);
+
+  // ✅ `uuid_id` 기반으로 `reservation_id` 조회
+  const fetchReservationId = async (uuidId) => {
+    console.log("가져온 uuidId:", uuidId)
+    try {
+      if (!uuidId) {
+        console.error("🚨 로그인된 사용자 UUID가 없습니다.");
+        return;
+      }
+
+      const response = await axios.get(
+        `http://localhost:8000/api/reservations/latest?uuid_id=${uuidId}`
+      );
+      console.log("📌 예약 데이터 응답:", response.data);
+
       if (response.data && response.data.id) {
-        setReservationId(response.data.id);
+        setReservationId(response.data.id); // ✅ reservationId 설정
         console.log("✅ 가져온 예약 ID:", response.data.id);
       } else {
         console.error("🚨 현재 사용자에 대한 예약 데이터를 찾을 수 없습니다.");
@@ -53,7 +83,6 @@ const Map = ({ userId }) => {
 
       initializeMap(startLocation, endLocation);
       fetchWalkingDistance(startLocation, endLocation);
-      saveWalkingRoute(startLocation, endLocation); // ✅ API 호출 추가
     } catch (error) {
       console.error("🚨 주소 데이터를 불러오는데 실패했습니다:", error);
     }
@@ -115,43 +144,28 @@ const Map = ({ userId }) => {
       const estimatedSteps = Math.round(totalDistance / 0.7); // 걸음 수 (1걸음 = 약 0.7m)
       const estimatedTime = Math.ceil(totalTime / 60); // 분 단위 변환
 
-      setDistance(totalDistance);
-      setTime(Math.round(totalTime / 60));
-      setSteps(Math.round(totalDistance / 0.7));
+      setDistance(distanceKm);
+      setTime(estimatedTime);
+      setSteps(estimatedSteps);
 
       console.log(`📏 거리: ${distanceKm} km`);
       console.log(`🚶‍♂️ 걸음 수: ${estimatedSteps} 걸음`);
       console.log(`⏳ 예상 소요 시간: ${estimatedTime} 분`);
 
+      // ✅ 부모 컴포넌트로 데이터 전달
+      onDataReady({ 
+        uuidId,
+        reservationId,
+        distance: distanceKm, 
+        steps: estimatedSteps, 
+        time: estimatedTime,
+        startLocation: start,
+        endLocation: end,
+       
+      });
 
     } catch (error) {
       console.error("🚨 거리 데이터를 불러오는데 실패했습니다:", error);
-    }
-  };
-
-  // ✅ 산책 경로 데이터 저장 API 호출
-  const saveWalkingRoute = async (start, end) => {
-    try {
-      if (!reservationId) {
-        console.error("🚨 예약 ID가 없습니다. 데이터를 저장할 수 없습니다.");
-        return;
-      }
-
-      const requestData = {
-        reservation_id: reservationId,
-        start_latitude: start.latitude,
-        start_longitude: start.longitude,
-        end_latitude: end.latitude,
-        end_longitude: end.longitude,
-        distance_km: distance,
-        estimated_steps: steps,
-        estimated_time: time,
-      };
-
-      const response = await axios.post("http://localhost:8000/api/walk/save-walking-route", requestData);
-      console.log("✅ 산책 경로 데이터 저장 완료:", response.data);
-    } catch (error) {
-      console.error("🚨 산책 데이터를 저장하는 데 실패했습니다:", error);
     }
   };
 
