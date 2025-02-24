@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { supabase } from "../../lib/supabaseClient";
+import RealTimeLocation from "../RealTimeLocation";
 
 const TMAP_API_KEY = process.env.REACT_APP_TMAP_API_KEY;
 
@@ -13,6 +14,7 @@ const Map = ({ onDataReady }) => {
   const [polyline, setPolyline] = useState(null);
   const [uuidId, setUuidId] = useState(null);  // ✅ uuidId 상태 추가
   const [reservationId, setReservationId] = useState(null);
+  const [endLocation, setEndLocation] = useState({ latitude: 37.505439, longitude: 127.031222 }); // ✅ 실시간 좌표용 state 추가
 
   useEffect(() => {
     const fetchUserUUID = async () => {
@@ -87,13 +89,18 @@ const Map = ({ onDataReady }) => {
         latitude: data.latitude,
         longitude: data.longitude
       };
-      const endLocation = { latitude: 37.505439, longitude: 127.031222 };
 
       initializeMap(startLocation, endLocation);
       fetchWalkingDistance(startLocation, endLocation);
     } catch (error) {
       console.error("🚨 주소 데이터를 불러오는데 실패했습니다:", error);
     }
+  };
+
+  // ✅ 실시간 목적지 업데이트 (30초마다 호출됨)
+  const handleRealTimeLocationUpdate = (newLocation) => {
+    console.log("📍 실시간 목적지 업데이트:", newLocation);
+    setEndLocation(newLocation); // 목적지 업데이트
   };
 
   const initializeMap = (startLocation, endLocation) => {

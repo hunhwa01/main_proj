@@ -58,7 +58,9 @@ async def get_latest_reservation(uuid_id: str, db: AsyncSession = Depends(get_db
 
 @router.get("/{reservation_id}/address")
 async def get_reservation_address(reservation_id: int, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(Reservation).where(Reservation.id == reservation_id))
+    result = await db.execute(
+        select(Reservation)
+        .where(Reservation.id == reservation_id))
     reservation = result.scalars().first()
 
     if not reservation:
