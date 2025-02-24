@@ -3,6 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from backend.database import get_db
 from backend.models.walk import WalkingRoute
 from backend.schemas.walk import WalkingRouteCreate
+from sqlalchemy.future import select
 
 router = APIRouter()
 
@@ -36,3 +37,13 @@ async def save_walking_route_api(route_data: WalkingRouteCreate, db: AsyncSessio
     except Exception as e:
         print(f"🚨 산책 데이터 저장 오류: {str(e)}")
         raise HTTPException(status_code=500, detail=f"서버 오류: {str(e)}")
+
+@router.get("/reports")
+async def get_walk_reports(db: AsyncSession = Depends(get_db)):
+    """
+    `walking_routes` 테이블에서 모든 산책 데이터를 불러온다.
+    """
+    async with db as session:
+        result = await session.execute(select(WalkingRoute).order_by(WalkingRoute.created_at.desc()))
+        walk_reports = result.scalars().all()
+        return walk_reports
