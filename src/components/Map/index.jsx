@@ -6,7 +6,6 @@ const TMAP_API_KEY = process.env.REACT_APP_TMAP_API_KEY;
 
 const Map = ({ onDataReady }) => {
   const mapRef = useRef(null);
-  const reservationIdRef = useRef(null);
   const [map, setMap] = useState(null);
   const [distance, setDistance] = useState(null);
   const [steps, setSteps] = useState(null);
@@ -35,12 +34,17 @@ const Map = ({ onDataReady }) => {
   useEffect(() => {
     console.log("가져온 uuidId:", uuidId)
     if (uuidId) {
-      const fetchData = async () => {
-        await fetchReservationId(uuidId).then(()=> fetchAddresses());
-      };
-      fetchData();
+        fetchReservationId(uuidId);
     }
   }, [uuidId]);
+
+  // ✅ reservationId가 설정된 후 주소 가져오기
+  useEffect(() => {
+    if (reservationId) {
+        console.log("reservationId 변경 감지됨:", reservationId);
+        fetchAddresses();
+    }
+  }, [reservationId]);
 
   // ✅ `uuid_id` 기반으로 `reservation_id` 조회
   const fetchReservationId = async (uuidId) => {
@@ -69,17 +73,21 @@ const Map = ({ onDataReady }) => {
 
   const fetchAddresses = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/address/addresses");
-      const data = await response.json();
-      console.log("📌 받아온 주소 데이터:", data);
-
-      if (!data || data.length < 2) {
-        console.error("🚨 출발지와 목적지를 설정할 데이터가 부족합니다.");
+      if (!reservationId) {
+        console.error("reservationId가 없습니다.");
         return;
       }
 
-      const startLocation = data[0]; // 출발지
-      const endLocation = data[1]; // 목적지
+      const response = await fetch(`http://localhost:8000/api/reservations/${reservationId}/address`);
+      const data = await response.json();
+
+      console.log(" 예약에서 가져온 주소 데이터:", data);
+
+      const startLocation = {
+        latitude: data.latitude,
+        longitude: data.longitude
+      };
+      const endLocation = { latitude: 37.505439, longitude: 127.031222 };
 
       initializeMap(startLocation, endLocation);
       fetchWalkingDistance(startLocation, endLocation);

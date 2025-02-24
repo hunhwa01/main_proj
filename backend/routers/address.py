@@ -28,3 +28,25 @@ async def get_addresses(session: AsyncSession = Depends(get_db)):  # ✅ 변경�
         raise HTTPException(status_code=500, detail=str(e))
     finally:
         await session.close()
+
+
+# ✅ 가장 최근 주소 가져오기
+@router.get("/latest")
+async def get_latest_address(session: AsyncSession = Depends(get_db)):  
+    try:
+        result = await session.execute(select(Address).order_by(Address.id.desc()).limit(1))
+        latest_address = result.scalars().first()
+
+        if not latest_address:
+            raise HTTPException(status_code=404, detail="최근 주소를 찾을 수 없습니다.")
+
+        return {
+            "address": latest_address.address,
+            "latitude": latest_address.latitude,
+            "longitude": latest_address.longitude,
+            "created_at": latest_address.created_at
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    finally:
+        await session.close()

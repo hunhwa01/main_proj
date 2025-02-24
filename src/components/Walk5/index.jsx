@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../lib/supabaseClient";
 import "./Walk5.css";
@@ -9,6 +9,7 @@ export default function Walk5() {
   const navigate = useNavigate();
   const [requestText, setRequestText] = useState(""); // 요청사항 입력
   const [selectedPet, setSelectedPet] = useState(null); // 선택된 반려동물 ID
+  const [latestAddress, setLatestAddress] = useState(null);
 
   // ✅ 현재 로그인한 사용자 UUID 가져오기
   const getUserUUID = async () => {
@@ -21,6 +22,27 @@ export default function Walk5() {
     return data.session.user.id;
   };
 
+  // ✅ 가장 최근 주소 가져오기
+  const fetchLatestAddress = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/api/address/latest");
+      const data = await response.json();
+
+      if (response.ok && data) {
+        console.log("📌 최신 주소 데이터:", data);
+        setLatestAddress(data);
+      } else {
+        console.warn("⚠️ 최신 주소 데이터를 찾을 수 없습니다.");
+      }
+    } catch (error) {
+      console.error("🚨 주소 데이터를 가져오는 중 오류 발생:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchLatestAddress();
+  }, []);
+
   // ✅ 버튼 클릭 시 reservations 테이블에 데이터 저장 후 페이지 이동
   const handleNext = async () => {
     const userUUID = await getUserUUID();
@@ -29,12 +51,19 @@ export default function Walk5() {
       return;
     }
 
+    if(!latestAddress) {
+      console.error("최신 주소 정보가 없습니다.");
+    }
+
     const requestData = {
       uuid_id: userUUID, // 로그인한 사용자 UUID
       pet_id: 1, // 🐶 실제 선택된 반려동물 ID (테스트용)
       trainer_id: 107, // 👨‍🏫 트레이너 ID (테스트용)
       schedule: new Date().toISOString().split("Z")[0], // 🗓️ 예약 시간 (현재 시간)
-      status: "pending"
+      status: "pending",
+      address: latestAddress.address,
+      latitude: latestAddress.latitude,
+      longitude: latestAddress.longitude,
     };
 
     console.log("📤 서버로 전송할 데이터:", requestData); // 🚀 디버깅용

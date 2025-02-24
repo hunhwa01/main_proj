@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, TIMESTAMP
+from sqlalchemy import Column, Integer, String, ForeignKey, TIMESTAMP, Float
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.sql import func
 from backend.database import Base
@@ -13,3 +13,6 @@ class Reservation(Base):
     trainer_id = Column(Integer, nullable=False)
     schedule = Column(TIMESTAMP(timezone=False), nullable=False)
     status = Column(String, nullable=False, default="pending")
+    address = Column(String(255), nullable=False)
+    latitude = Column(Float, nullable=False)
+    longitude = Column(Float, nullable=False)
