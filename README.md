@@ -17,3 +17,7 @@ npm install react-google-places-autocomplete
 pip install python-dotenv
 
 pip install httpx
+
+pip install passlib
+
+pip install python-multipart
