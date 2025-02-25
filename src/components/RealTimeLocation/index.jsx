@@ -4,6 +4,8 @@ export default function RealTimeLocation({ onLocationUpdate }) {
   const [location, setLocation] = useState(null);
 
   useEffect(() => {
+    let intervalId; // 🔥 setInterval ID 저장
+
     const fetchLocation = () => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -21,12 +23,15 @@ export default function RealTimeLocation({ onLocationUpdate }) {
       );
     };
 
-    // 🔥 30초마다 위치를 가져옴 (위치 변화와 상관없이)
-    const interval = setInterval(fetchLocation, 30000);
+    // 🔥 30초마다 실행되는 setInterval (기존 interval 정리)
+    intervalId = setInterval(fetchLocation, 30000);
     fetchLocation(); // 처음 한 번 즉시 실행
 
-    return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 정리
-  }, [onLocationUpdate]);
+    return () => {
+      console.log("🛑 실시간 위치 추적 중지");
+      clearInterval(intervalId); // ✅ 컴포넌트 언마운트 시 interval 제거
+    };
+  }, []); // ✅ 의존성 배열을 빈 배열로 설정하여 최초 한 번만 실행
 
   return null; // UI를 렌더링하지 않는 컴포넌트
 }
