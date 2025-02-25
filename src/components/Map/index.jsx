@@ -272,8 +272,16 @@ const Map = ({ onDataReady }) => {
 
     setMap(newMap);
 
-    new window.Tmapv2.Marker({ position: startPosition, map: newMap, label: "출발지" });
-    new window.Tmapv2.Marker({ position: endPosition, map: newMap, label: "목적지" });
+    new window.Tmapv2.Marker({
+      position: startPosition, 
+      map: newMap, 
+      icon: "/mapicons/start.png",
+      iconSize: new window.Tmapv2.Size(32, 32) });
+    new window.Tmapv2.Marker({ 
+      position: endPosition, 
+      map: newMap, 
+      icon: "/mapicons/end.png", 
+      iconSize: new window.Tmapv2.Size(32, 32) });
   };
 
   return (
