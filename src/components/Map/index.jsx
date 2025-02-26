@@ -12,7 +12,9 @@ const Map = ({ onDataReady }) => {
   const [steps, setSteps] = useState(null);
   const [time, setTime] = useState(null);
   const [polyline, setPolyline] = useState(null);
-  const [uuidId, setUuidId] = useState(null);  // ✅ uuidId 상태 추가
+  const [startMarker, setStartMarker] = useState(null);
+  const endMarkerRef = useRef(null);
+  const [uuidId, setUuidId] = useState(null);
   const [reservationId, setReservationId] = useState(null);
   const [startLocation, setStartLocation] = useState(null);
   const [endLocation, setEndLocation] = useState(null);
@@ -36,7 +38,6 @@ const Map = ({ onDataReady }) => {
 
   // ✅ `uuid_id`가 설정된 후 데이터 가져오기
   useEffect(() => {
-    console.log("가져온 uuidId:", uuidId)
     if (uuidId) {
         fetchReservationId(uuidId);
     }
@@ -81,9 +82,9 @@ const Map = ({ onDataReady }) => {
         latitude: data.latitude,
         longitude: data.longitude
       };
-
       setStartLocation(startLocation);
       setEndLocation(startLocation); // 초기 목적지는 출발지와 동일하게 설정
+      
       initializeMap(startLocation, startLocation);
     } catch (error) {
       console.error("🚨 주소 데이터를 불러오는데 실패했습니다:", error);
@@ -94,19 +95,21 @@ const Map = ({ onDataReady }) => {
   const handleRealTimeLocationUpdate = (newLocation) => {
     console.log("📍 실시간 목적지 업데이트:", newLocation);
     setEndLocation(newLocation); // 목적지 업데이트
+
+    if (endMarkerRef.current) {
+      console.log("기존 현위치 마커 위치 변경");
+      endMarkerRef.current.setPosition(new window.Tmapv2.LatLng(newLocation.latitude, newLocation.longitude));
+    }
   };
 
   useEffect(() => {
     if (!startLocation || !endLocation) return;
-
-    // 🛑 목적지가 변경되었을 때만 지도 업데이트
     if (prevEndLocation && prevEndLocation.latitude === endLocation.latitude && prevEndLocation.longitude === endLocation.longitude) {
       console.log("⏳ 위치 변화 없음, API 요청 생략");
       return;
     }
 
     console.log("📌 위치 변화 감지됨! 지도 및 경로 업데이트 실행");
-    initializeMap(startLocation, endLocation);
     fetchWalkingDistance(startLocation, endLocation);
     setPrevEndLocation(endLocation);
   }, [endLocation]);
@@ -165,8 +168,9 @@ const Map = ({ onDataReady }) => {
         endLocation: end,
 
       });
-      drawPedestrianRoute(startLocation, end);
-
+      setTimeout(() => {
+        drawPedestrianRoute(start, end, map);
+      }, 1000);
     } catch (error) {
       console.error("🚨 거리 데이터를 불러오는데 실패했습니다:", error);
     }
@@ -177,6 +181,10 @@ const Map = ({ onDataReady }) => {
     try {
       console.log("📌 출발지:", start);
       console.log("📌 목적지:", end);
+      if (!mapInstance) {
+        console.error("mapInstance가 null 입니다");
+        return;
+      }
 
       const requestData = {
         startX: start.longitude.toFixed(6),
@@ -227,11 +235,8 @@ const Map = ({ onDataReady }) => {
       console.log("📌 변환된 폴리라인 좌표 개수:", drawInfoArr.length);
       console.log("📌 변환된 폴리라인 좌표 목록:", drawInfoArr);
 
-      if (polyline) polyline.setMap(null);
-
       // ✅ 기존 폴리라인 삭제
       if (polyline) {
-        console.log("🛑 기존 폴리라인 삭제");
         polyline.setMap(null);
         setPolyline(null);
       }
@@ -260,11 +265,8 @@ const Map = ({ onDataReady }) => {
       setMap(null);
     }
 
-    const startPosition = new window.Tmapv2.LatLng(startLocation.latitude, startLocation.longitude);
-    const endPosition = new window.Tmapv2.LatLng(endLocation.latitude, endLocation.longitude);
-
     const newMap = new window.Tmapv2.Map(mapRef.current, {
-      center: startPosition,
+      center: new window.Tmapv2.LatLng(startLocation.latitude, startLocation.longitude),
       width: "100%",
       height: "100%",
       zoom: 16,
@@ -272,16 +274,18 @@ const Map = ({ onDataReady }) => {
 
     setMap(newMap);
 
-    new window.Tmapv2.Marker({
-      position: startPosition, 
+    const startMarkerInstance = new window.Tmapv2.Marker({
+      position: new window.Tmapv2.LatLng(startLocation.latitude, startLocation.longitude), 
       map: newMap, 
       icon: "/mapicons/start.png",
       iconSize: new window.Tmapv2.Size(32, 32) });
-    new window.Tmapv2.Marker({ 
-      position: endPosition, 
+      endMarkerRef.current = new window.Tmapv2.Marker({ 
+      position: new window.Tmapv2.LatLng(endLocation.latitude, endLocation.longitude), 
       map: newMap, 
       icon: "/mapicons/end.png", 
       iconSize: new window.Tmapv2.Size(32, 32) });
+
+      setStartMarker(startMarkerInstance);
   };
 
   return (

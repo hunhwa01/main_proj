@@ -7,6 +7,27 @@ function Live() {
   const [messages, setMessages] = useState([]); // 채팅 메시지 리스트
   const [isSending, setIsSending] = useState(false); // ✅ 중복 전송 방지 플래그
   const [activeTab, setActiveTab] = useState("walk"); // 현재 활성화된 탭 ('walk' | 'chat')
+  const [walkData, setWalkData] = useState({
+    uuidId: null,
+    distance: 0,
+    steps: 0,
+    time: 0,
+    startLocation: null,
+    endLocation: null,
+  });
+
+  // ✅ Map에서 받은 데이터 저장
+  const handleRouteData = (data) => {
+    console.log("📥 Map에서 받은 데이터:", data);
+    setWalkData({
+      uuidId: data.uuidId,
+      distance: data.distance,
+      steps: data.steps,
+      time: data.time,
+      startLocation: data.startLocation,
+      endLocation: data.endLocation,
+    });
+  };
 
   // ✅ 트레이너의 자동 응답 메시지 설정
   const getTrainerResponse = (userMessage) => {
@@ -84,7 +105,7 @@ function Live() {
       {/* 산책경로 탭이 활성화되었을 때 Map 컴포넌트 표시 */}
       {activeTab === "walk" && (
         <div className="live-map-container">
-          <Map />
+          <Map onDataReady={handleRouteData}/>
         </div>
       )}
       
